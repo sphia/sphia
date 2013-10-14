@@ -1,4 +1,11 @@
 
+//
+// main.c
+//
+// copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
+//
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -56,7 +63,17 @@ main (int argc, char *argv[]) {
   command_init(&program, "sphia", SPHIA_VERSION);
 
   // reset usage
-  program.usage = "<command> [<args>] [<flags>]";
+  program.usage =
+    "<command> [--key <key>] [--value <value>] [--path <path>]"
+    "          [--version] [--help]"
+
+    "\n\n"
+    "   init                         initialize a new database\n"
+    "   get -k <key>                 get a value by key\n"
+    "   set -k <key> -v <value>      set a value by value\n"
+    "   ls                           list all keys and values\n"
+    "   clear                        clears database of all keys\n"
+  ;
 
   // opts
   command_option(&program, "-V", "--verbose", "enable verbose output", verbose_opt);
@@ -162,6 +179,7 @@ main (int argc, char *argv[]) {
     }
 
     SPHIA_DB_FOREACH(key, val, sphia->db) {
+      val[sp_valuesize(_c)] = '\0';
       printf("%s => '%s'\n", key, val);
     }
 
@@ -189,6 +207,28 @@ main (int argc, char *argv[]) {
       exit(1);
     }
 
+    sphia_free(sphia);
+  } else if (0 == strcmp("clear", cmd)) {
+
+    //
+    // $ sphia clear --path ~/db
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open sophia database");
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    rc = sphia_clear(sphia);
+
+    if (-1 == rc) {
+      sphia_error("Failed to clear sophia database");
+    }
+
+    printf("Cleared sophia database at path '%s'\n", opts.path);
     sphia_free(sphia);
   }
 

@@ -1,12 +1,38 @@
 
+//
+// rm.c
+//
+// copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
+//
+
+
 #include "rm.h"
 
 int
 sphia_rm (sphia_t *sphia, char *key) {
-  int size = (int) strlen(key);
+  int size = 0;
   int rc = 0;
+  int i = 0;
+  int count = 0;
+  char *keys[4096];
+
+  if (NULL != key) {
+    size = (int) strlen(key);
+  }
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
+    k[sp_keysize(_c)] = '\0';
+
+    // accepts NULL as `key` which indicates
+    // a removal of every key so we need
+    // to push to a key array for removal
+    // after the loop
+    if (NULL == key) {
+      keys[count++] = k;
+      continue;
+    }
+
+
     if (NULL == v)
       continue;
 
@@ -28,6 +54,17 @@ sphia_rm (sphia_t *sphia, char *key) {
         return rc;
       } else {
         return sp_delete(sphia->db, tkey, tsize);
+      }
+    }
+  }
+
+  if (NULL == key) {
+    // `sp_destroy(void *o)` already called
+    for (i = 0; i < count; ++i) {
+      if (NULL == keys[i]) continue;
+      rc = sp_delete(sphia->db, (const char *) keys[i], strlen((const char *) keys[i]));
+      if (-1 == rc) {
+        return rc;
       }
     }
   }

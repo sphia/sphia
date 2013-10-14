@@ -43,7 +43,7 @@ command_help(command_t *self) {
   int i;
   for (i = 0; i < self->option_count; ++i) {
     command_option_t *option = &self->options[i];
-    printf("  %s, %-15s %s\n"
+    printf("  %s, %-25s %s\n"
       , option->small
       , option->large_with_arg
       , option->description);
