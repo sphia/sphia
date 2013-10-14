@@ -1,0 +1,9 @@
+{
+  "name": "sphia",
+  "version": "0.0.1",
+  "repo": "jwerle/sphia",
+  "description": "Command line utility for reading a sophia database",
+  "keywords": ["sophia", "sphia", "cli", "util"],
+  "license": "MIT",
+  "install": "make install"
+}
