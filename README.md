@@ -18,6 +18,11 @@ $ git clone git@github.com:jwerle/sphia.git /tmp/sphia
 $ cd /tmp/sphia && make install
 ```
 
+Via curl:
+
+```sh
+$ curl -Lo https://raw.github.com/jwerle/sphia/bootstrap/install.sh | bash
+```
 
 ## Setup
 
