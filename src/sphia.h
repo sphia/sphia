@@ -16,7 +16,7 @@
 #include <sp.h>
 
 
-#define SPHIA_VERSION "0.0.5"
+#define SPHIA_VERSION "0.0.6"
 
 #define SPHIA_DB_FOREACH(_k, _v, _db)                      \
   char *_k = NULL, *_v = NULL;                             \
