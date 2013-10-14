@@ -1,0 +1,20 @@
+*.o
+*.so.1.1
+*.so.1
+*.so
+*.mk
+out
+*.a
+gyp-mac-tool
+sophia.Makefile
+.*.sw[op]
+
+# Test binaries
+test/common
+test/crash
+test/i
+test/limit
+test/merge
+test/recover
+test/concurrent
+test/transaction
