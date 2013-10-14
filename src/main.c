@@ -179,8 +179,7 @@ main (int argc, char *argv[]) {
     }
 
     SPHIA_DB_FOREACH(key, val, sphia->db) {
-      val[sp_valuesize(_c)] = '\0';
-      printf("%s => '%s'\n", key, val);
+      printf("%s => '%s'\n", trim(key), trim(val));
     }
 
     sphia_free(sphia);

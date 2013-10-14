@@ -13,6 +13,9 @@ char *
 sphia_get (sphia_t *sphia, char *key) {
   int size = (int) strlen(key);
 
+  // trim new lines and etc
+  key = trim(key);
+
   SPHIA_DB_FOREACH(k, v, sphia->db) {
     k[sp_keysize(_c)] = '\0';
 
