@@ -1,7 +1,7 @@
 sphia(1) - cli tool for sophia databases
 =====
 
-Command utility for operations on a sophia database
+Command utility for operations on a [sophia](https://github.com/pmwkaa/sophia) database
 
 ## Install
 
