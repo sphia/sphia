@@ -41,3 +41,11 @@ sphia_new (char *path) {
 
   return sphia;
 }
+
+
+void
+sphia_free (sphia_t *sphia) {
+  sp_destroy(sphia->env);
+  sp_destroy(sphia->db);
+  free(sphia);
+}

@@ -9,8 +9,6 @@
 #ifndef __SPHIA_SET_H__
 #define __SPHIA_SET_H__ 1
 
-
-#include <sophia.h>
 #include "sphia.h"
 
 int

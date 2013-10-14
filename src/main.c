@@ -75,9 +75,30 @@ main (int argc, char *argv[]) {
     printf("path set to '%s'\n", opts.path);
   }
 
-  if (0 == strcmp("get", cmd)) {
+  if (0 == strcmp("init", cmd)) {
+
+    //
+    // $ sphia init --path ~/db
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_ferror("Error initializing sophia database to path '%s'", opts.path);
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    sphia_free(sphia);
+
+  } else if (0 == strcmp("get", cmd)) {
+
+    //
+    // $ sphia get --key foo --path ~/db
+    //
+
     if (NULL == opts.key) {
-      fprintf(stderr, "error: %s\n", "Missing '--key <name>' flag");
+      sphia_ferror("%s", "Missing '--key <name>' flag");
       exit(1);
     }
 
@@ -85,24 +106,90 @@ main (int argc, char *argv[]) {
     char *value = sphia_get(sphia, opts.key);
 
     if (NULL == value) {
-      fprintf(stderr, "error: An error occured %s\n", sp_error(""));
+      char *msg = sp_error(sphia->db);
+
+      if (NULL != msg) {
+        sphia_ferror("An error occured. %s", msg);
+        sphia_free(sphia);
+        exit(1);
+      } else {
+        sphia_ferror("Couldn't find '%s'", opts.key);
+        sphia_free(sphia);
+        exit(1);
+      }
     } else {
       printf("%s\n", value);
     }
+
   } else if (0 == strcmp("set", cmd)) {
+
+    //
+    // $ sphia set --key foo --value bar --path ~/db
+    //
+
     if (NULL == opts.key) {
-      fprintf(stderr, "error: %s\n", "Missing '--key <name>' flag");
+      sphia_ferror("%s", "Missing '--key <name>' flag");
       exit(1);
     } else if (NULL == opts.value) {
-      fprintf(stderr, "error: %s\n", "Missing '--value <value>' flag");
+      sphia_ferror("%s", "Missing '--value <value>' flag");
       exit(1);
     }
 
     sphia = sphia_new(opts.path);
     rc = sphia_set(sphia, opts.key, opts.value);
+
     if (-1 == rc) {
-      fprintf(stderr, "error: An error occured setting data for key '%s' %s\n", opts.key, sp_error(sphia->db));
+      sphia_ferror("An error occured setting data for key '%s' %s", opts.key, sp_error(sphia->db));
+      sphia_free(sphia);
+      exit(1);
+    } else {
+      printf("%s = '%s'\n", opts.key, opts.value);
+      sphia_free(sphia);
     }
+
+  } else if (0 == strcmp("list", cmd) || 0 == strcmp("ls", cmd)) {
+
+    //
+    // $ sphia list --path ~/db
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open sophia database");
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    SPHIA_DB_FOREACH(key, val, sphia->db) {
+      printf("%s => '%s'\n", key, val);
+    }
+
+    sphia_free(sphia);
+
+  } else if (0 == strcmp("rm", cmd) || 0 == strcmp("remove", cmd)) {
+
+    //
+    // $ sphia rm --key name --path ~/db
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open sophia database");
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    rc = sphia_rm(sphia, opts.key);
+
+    if (-1 == rc) {
+      sphia_ferror("Error removing key '%s'. %s", opts.key, sp_error(sphia->db));
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    sphia_free(sphia);
   }
 
   command_free(&program);
