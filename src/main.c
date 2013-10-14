@@ -55,16 +55,22 @@ str_flatten (char *array[], int start, int end);
 
 int
 main (int argc, char *argv[]) {
+  char *cmd = NULL;
+
+  // ensure cmd is not `NULL`
+  if (NULL == argv[1]) {
+    cmd = "";
+  } else {
+    cmd = strdup(argv[1]);
+  }
+
   command_t program;
-  char *cmd = strdup(argv[1]);
+
   char tmp[256];
   char *default_path = getenv("SPHIA_PATH");
   int rc = 0;
   sphia_t *sphia;
 
-  if (NULL == cmd) {
-    cmd = "";
-  }
 
   command_init(&program, "sphia", SPHIA_VERSION);
 
@@ -78,8 +84,11 @@ main (int argc, char *argv[]) {
     "   init                         initialize a new database\n"
     "   get -k <key>                 get a value by key\n"
     "   set -k <key> -v <value>      set a value by key\n"
+    "   rm -k <key>                  remove a value by key\n"
     "   ls                           list all keys and values\n"
     "   clear                        clears database of all keys\n"
+    "   st                           check status of database\n"
+    "   purge                        purge database of all corrupt and incomplete data\n"
   ;
 
   // opts
@@ -98,6 +107,7 @@ main (int argc, char *argv[]) {
       opts.path = default_path;
     }
   }
+
 
   if (1 == opts.verbose) {
     printf("path set to '%s'\n", opts.path);

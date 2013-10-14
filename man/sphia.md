@@ -8,20 +8,46 @@ sphia(1) -- Command line utility for sophia databases
 
 ## OPTIONS
 
-  -V, --version                 output program version
-  -h, --help                    output help information
-  -V, --verbose                 enable verbose output
-  -p, --path <path>             set the path
-  -k, --key <name>              key to get
-  -v, --value <name>            value to set
+  -V, --version
+      output program version
+
+  -h, --help
+      output help information
+
+  --verbose
+      enable verbose output
+
+  -p, --path <path>
+      set the path
+
+  -k, --key <name>
+      key to get
+
+  -v, --value <name>
+      value to set
+
 
 ## COMMANDS
+  `init`
+      initialize a new database
 
-   init                         initialize a new database
-   get -k <key>                 get a value by key
-   set -k <key> -v <value>      set a value by key
-   ls                           list all keys and values
-   clear                        clears database of all keys
+  `get`
+      get a value by key
+
+  `set`
+      set a value by key
+
+  `rm|remove`
+      remove a value by key
+
+  `ls|list`
+      list all keys and values
+
+  `clear`
+      clears database of all keys
+
+  `purge`
+      purge database of all corrupt and incomplete data
 
 ## AUTHOR
 

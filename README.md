@@ -74,6 +74,19 @@ Clear database of all keys:
 $ sphia clear --path <path>
 ```
 
+Get status on a database (will exit with 1 or 0 code):
+
+```sh
+$ sphia st --path <path>
+```
+
+Purge a database of all corrupt and incomplete data:
+
+```sh
+$ sphia purge --path <path>
+```
+
+
 ### Options
 
 Output `sphia` version:

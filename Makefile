@@ -25,4 +25,8 @@ install: build
 uninstall:
 	rm -f $(PREFIX)/bin/$(BIN)
 
+docs:
+	rm -f man/sphia.1
+	curl -F page=@man/sphia.md http://mantastic.herokuapp.com > man/sphia.1
+
 .PHONY: all clean test build install uninstall

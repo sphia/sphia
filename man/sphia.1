@@ -11,19 +11,56 @@
                 [\-\-version] [\-\-help]
 .
 .SH "OPTIONS"
-  \-V, \-\-version                 output program version
-  \-h, \-\-help                    output help information
-  \-V, \-\-verbose                 enable verbose output
-  \-p, \-\-path <path>             set the path
-  \-k, \-\-key <name>              key to get
-  \-v, \-\-value <name>            value to set
+  \-V, \-\-version
+      output program version
+.
+.P
+  \-h, \-\-help
+      output help information
+.
+.P
+  \-\-verbose
+      enable verbose output
+.
+.P
+  \-p, \-\-path <path>
+      set the path
+.
+.P
+  \-k, \-\-key <name>
+      key to get
+.
+.P
+  \-v, \-\-value <name>
+      value to set
 .
 .SH "COMMANDS"
-   init                         initialize a new database
-   get \-k <key>                 get a value by key
-   set \-k <key> \-v <value>      set a value by key
-   ls                           list all keys and values
-   clear                        clears database of all keys
+  \fBinit\fR
+      initialize a new database
+.
+.P
+  \fBget\fR
+      get a value by key
+.
+.P
+  \fBset\fR
+      set a value by key
+.
+.P
+  \fBrm|remove\fR
+      remove a value by key
+.
+.P
+  \fBls|list\fR
+      list all keys and values
+.
+.P
+  \fBclear\fR
+      clears database of all keys
+.
+.P
+  \fBpurge\fR
+      purge database of all corrupt and incomplete data
 .
 .SH "AUTHOR"
 .
