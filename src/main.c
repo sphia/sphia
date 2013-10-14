@@ -180,7 +180,7 @@ main (int argc, char *argv[]) {
     }
 
     SPHIA_DB_FOREACH(key, val, sphia->db) {
-      printf("%s => '%s'\n", trim(key), trim(val));
+      printf("%s = '%s'\n", trim(key), trim(val));
     }
 
     sphia_free(sphia);
