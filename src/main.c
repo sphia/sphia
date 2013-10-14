@@ -58,6 +58,7 @@ main (int argc, char *argv[]) {
   command_t program;
   char *cmd = strdup(argv[1]);
   char tmp[256];
+  char *default_path = getenv("SPHIA_PATH");
   int rc = 0;
   sphia_t *sphia;
 
@@ -91,7 +92,11 @@ main (int argc, char *argv[]) {
   command_parse(&program, argc, argv);
 
   if (NULL == opts.path) {
-    opts.path = getcwd(tmp, sizeof(tmp));
+    if (NULL == default_path) {
+      opts.path = getcwd(tmp, sizeof(tmp));
+    } else {
+      opts.path = default_path;
+    }
   }
 
   if (1 == opts.verbose) {
