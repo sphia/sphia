@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "which.h"
 #include "sphia.h"
 #include "commander.h"
 
@@ -48,10 +49,14 @@ KEY_OPT(value);
 KEY_OPT_TRUE(verbose);
 
 
+char *
+str_flatten (char *array[], int start, int end);
+
+
 int
 main (int argc, char *argv[]) {
   command_t program;
-  char *cmd = argv[1];
+  char *cmd = strdup(argv[1]);
   char tmp[256];
   int rc = 0;
   sphia_t *sphia;
@@ -230,6 +235,40 @@ main (int argc, char *argv[]) {
 
     printf("Cleared sophia database at path '%s'\n", opts.path);
     sphia_free(sphia);
+  } else {
+
+    //
+    // $ sphia <command> <args>
+    //
+
+    char *cargs = trim(strdup(str_flatten(argv, 2, argc)));
+    char cbin[64];
+    char cexe[1024];
+    char *child = NULL;
+
+    sprintf(cbin, "sphia-%s", cmd);
+
+    child = which(trim((char *)cbin));
+
+    if (NULL == child) {
+      sphia_ferror("'%s' not a sphia command.\nSee sphia --help for more information.", cmd);
+      exit(1);
+    }
+
+    sprintf(cexe, "%s %s", child, cargs);
+
+    if (1 == opts.verbose) {
+      printf("absolute command path '%s'\n", cexe);
+    }
+
+    rc = system(cexe);
+
+    if (1 == opts.verbose) {
+      printf("rc = '%d'\n", rc);
+    }
+
+    exit(rc);
+
   }
 
   command_free(&program);
@@ -237,3 +276,18 @@ main (int argc, char *argv[]) {
 }
 
 
+char *
+str_flatten (char *array[], int start, int end) {
+  char *str = malloc(sizeof(char) * (start + end));
+  int i = start;
+  strcat(str, "");
+  for (; i < end; ++i) {
+    strcat(str, array[i]);
+    strcat(str, " ");
+    if (NULL == array[i]) {
+      break;
+     }
+  }
+
+  return str;
+}
