@@ -112,8 +112,11 @@ commands:
    init                         initialize a new database
    get -k <key>                 get a value by key
    set -k <key> -v <value>      set a value by key
+   rm -k <key>                  remove a value by key
    ls                           list all keys and values
    clear                        clears database of all keys
+   st                           check status of database
+   purge                        purge database of all corrupt and incomplete data
 
 options:
   -V, --version                 output program version
