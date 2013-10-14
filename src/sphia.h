@@ -58,6 +58,7 @@ sphia_free (sphia_t *sphia);
 #include "set.h"
 #include "rm.h"
 #include "clear.h"
+#include "srepl.h"
 
 #endif
 

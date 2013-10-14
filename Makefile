@@ -2,9 +2,10 @@
 BIN = sphia
 PREFIX = /usr/local
 MANPREFIX ?= "$(PREFIX)/share/man/man1"
+REPL_SRC = $(wildcard repl/*.c)
 SOPHIA_SRC = $(wildcard sophia/db/*.c)
-SRC = $(SOPHIA_SRC) $(wildcard src/*.c)
-CFLAGS = -std=c99 -Isophia/db -Wall -pthread -march=native -fPIC -fvisibility=hidden  -O2
+SRC = $(SOPHIA_SRC) $(REPL_SRC) $(wildcard src/*.c)
+CFLAGS = -std=c99 -I sophia/db -I repl -Wall -pthread -march=native -fPIC -fvisibility=hidden  -O2
 
 all: clean test build
 

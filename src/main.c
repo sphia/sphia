@@ -230,6 +230,30 @@ main (int argc, char *argv[]) {
 
     printf("Cleared sophia database at path '%s'\n", opts.path);
     sphia_free(sphia);
+  } else if (0 == strcmp("repl", cmd)) {
+
+    //
+    // $ sphia repl --path ~/db
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open sophia database");
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    rc = sphia_repl(sphia);
+
+    if (-1 == rc) {
+      sphia_error("Unknown error in repl");
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    sphia_free(sphia);
+    printf("\n");
   }
 
   command_free(&program);
