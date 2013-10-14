@@ -64,10 +64,11 @@ main (int argc, char *argv[]) {
 
   // reset usage
   program.usage =
-    "<command> [--key <key>] [--value <value>] [--path <path>]"
-    "          [--version] [--help]"
+    "<command> [--key <key>] [--value <value>] [--path <path>]\n"
+    "                       [--version] [--help]"
 
     "\n\n"
+    "commands:\n"
     "   init                         initialize a new database\n"
     "   get -k <key>                 get a value by key\n"
     "   set -k <key> -v <value>      set a value by value\n"
