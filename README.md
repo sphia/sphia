@@ -18,6 +18,22 @@ $ git clone git@github.com:jwerle/sphia.git /tmp/sphia
 $ cd /tmp/sphia && make install
 ```
 
+
+## Setup
+
+Set the `SPHIA_PATH` environment variable for your default database path. 
+It will otherwise attempt to read from your current working database.
+
+```sh
+$ export SPHIA_PATH=~/db
+```
+
+
+```sh
+$ sphia set -k name -v "Joseph Werle"
+```
+
+
 ## Usage
 
 
