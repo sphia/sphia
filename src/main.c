@@ -71,7 +71,7 @@ main (int argc, char *argv[]) {
     "commands:\n"
     "   init                         initialize a new database\n"
     "   get -k <key>                 get a value by key\n"
-    "   set -k <key> -v <value>      set a value by value\n"
+    "   set -k <key> -v <value>      set a value by key\n"
     "   ls                           list all keys and values\n"
     "   clear                        clears database of all keys\n"
   ;
