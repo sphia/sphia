@@ -8,7 +8,6 @@
 
 #include "clear.h"
 
-
 int
 sphia_clear (sphia_t *sphia) {
   return sphia_rm(sphia, NULL);

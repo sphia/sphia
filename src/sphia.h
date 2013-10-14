@@ -39,6 +39,13 @@
 }
 
 
+#define sphia_db_error(fmt, ...) {                         \
+  char s[256];                                             \
+  sprintf(s, "%s\n", fmt);                                 \
+  fprintf(stderr, s, ##__VA_ARGS__);                       \
+}
+
+
 typedef struct {
   char *path;
   void *db;
@@ -58,6 +65,9 @@ sphia_free (sphia_t *sphia);
 #include "set.h"
 #include "rm.h"
 #include "clear.h"
+#include "status.h"
+#include "purge.h"
+
 
 #endif
 

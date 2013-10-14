@@ -113,7 +113,7 @@ main (int argc, char *argv[]) {
 
     if (NULL == sphia) {
       sphia_ferror("Error initializing sophia database to path '%s'", opts.path);
-      sphia_free(sphia);
+      command_free(&program);
       exit(1);
     }
 
@@ -127,6 +127,7 @@ main (int argc, char *argv[]) {
 
     if (NULL == opts.key) {
       sphia_ferror("%s", "Missing '--key <name>' flag");
+      command_free(&program);
       exit(1);
     }
 
@@ -139,10 +140,12 @@ main (int argc, char *argv[]) {
       if (NULL != msg) {
         sphia_ferror("An error occured. %s", msg);
         sphia_free(sphia);
+        command_free(&program);
         exit(1);
       } else {
         sphia_ferror("Couldn't find '%s'", opts.key);
         sphia_free(sphia);
+        command_free(&program);
         exit(1);
       }
     } else {
@@ -157,9 +160,11 @@ main (int argc, char *argv[]) {
 
     if (NULL == opts.key) {
       sphia_ferror("%s", "Missing '--key <name>' flag");
+      command_free(&program);
       exit(1);
     } else if (NULL == opts.value) {
       sphia_ferror("%s", "Missing '--value <value>' flag");
+      command_free(&program);
       exit(1);
     }
 
@@ -185,7 +190,7 @@ main (int argc, char *argv[]) {
 
     if (NULL == sphia) {
       sphia_error("Failed to open sophia database");
-      sphia_free(sphia);
+      command_free(&program);
       exit(1);
     }
 
@@ -214,10 +219,12 @@ main (int argc, char *argv[]) {
     if (-1 == rc) {
       sphia_ferror("Error removing key '%s'. %s", opts.key, sp_error(sphia->db));
       sphia_free(sphia);
+      command_free(&program);
       exit(1);
     }
 
     sphia_free(sphia);
+
   } else if (0 == strcmp("clear", cmd)) {
 
     //
@@ -229,6 +236,7 @@ main (int argc, char *argv[]) {
     if (NULL == sphia) {
       sphia_error("Failed to open sophia database");
       sphia_free(sphia);
+      command_free(&program);
       exit(1);
     }
 
@@ -236,11 +244,62 @@ main (int argc, char *argv[]) {
 
     if (-1 == rc) {
       sphia_error("Failed to clear sophia database");
+      sphia_free(sphia);
+      command_free(&program);
+      exit(1);
     }
 
     printf("Cleared sophia database at path '%s'\n", opts.path);
     sphia_free(sphia);
-  } else {
+
+  } else if (0 == strcmp("st", cmd) || 0 == strcmp("status", cmd)) {
+
+    //
+    // $ sphia status --path <path>
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      command_free(&program);
+      exit(1);
+    }
+
+    rc = sphia_status(sphia);
+
+    if (1 == opts.verbose) {
+      printf("status: '%d'\n", rc);
+    }
+
+    sphia_free(sphia);
+
+  } else if (0 == strcmp("purge", cmd)) {
+
+    //
+    // $ sphia purge --path <path>
+    //
+
+    rc = sphia_purge(opts.path);
+
+    if (-1 == rc) {
+      sphia_error("Failed to purge database");
+      command_free(&program);
+      exit(1);
+    }
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to purge database");
+      command_free(&program);
+      exit(1);
+    }
+
+    sphia_free(sphia);
+
+    printf("Purged databased\n");
+
+  } else if (strlen(cmd) > 0) {
 
     //
     // $ sphia <command> <args>
@@ -272,6 +331,7 @@ main (int argc, char *argv[]) {
       printf("rc = '%d'\n", rc);
     }
 
+    command_free(&program);
     exit(rc);
 
   }
