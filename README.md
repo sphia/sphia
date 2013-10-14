@@ -21,7 +21,7 @@ $ cd /tmp/sphia && make install
 Via curl:
 
 ```sh
-$ curl -Lo- https://raw.github.com/jwerle/sphia/bootstrap/install.sh | bash
+$ curl -Lo- https://raw.github.com/jwerle/sphia/master/install.sh | bash
 ```
 
 ## Setup
