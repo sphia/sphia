@@ -26,6 +26,8 @@ sphia(1) -- Command line utility for sophia databases
   -v, --value <name>
       value to set
 
+  -s, --strict
+      enable strict mode for a command
 
 ## COMMANDS
 
@@ -54,7 +56,10 @@ sphia(1) -- Command line utility for sophia databases
       reset database of all data
 
   `count`
-      get the count      
+      get the count
+
+  `search`
+      search for a key or value      
 
 ## AUTHOR
 

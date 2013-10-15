@@ -103,6 +103,12 @@ Get key count:
 $ sphia count --path <path>
 ```
 
+Search for a key or value:
+
+```sh
+$ sphia search --key <key> --value <value>
+```
+
 ### Options
 
 Output `sphia` version:
@@ -128,6 +134,9 @@ commands:
    clear                        clears database of all keys
    st                           check status of database
    purge                        purge database of all corrupt and incomplete data
+   reset                        reset database of all data
+   count                        get key count
+   search [-k <aeg>] [-v <arg>] search for a key or value
 
 options:
   -V, --version                 output program version
@@ -136,6 +145,8 @@ options:
   -p, --path <path>             set the path
   -k, --key <name>              key to get
   -v, --value <name>            value to set
+  -s, --strict                  strict mode for a command
+
 ```
 
 Turn on verbose output:

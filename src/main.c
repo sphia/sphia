@@ -10,7 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "case.h"
 #include "which.h"
+#include "buffer.h"
 #include "sphia.h"
 #include "commander.h"
 
@@ -21,6 +23,7 @@ struct options {
   char *key;
   char *value;
   int verbose;
+  int strict;
 };
 
 static struct options opts;
@@ -45,8 +48,10 @@ KEY_OPT(path);
 KEY_OPT(key);
 KEY_OPT(value);
 
+
 // flag booleans
 KEY_OPT_TRUE(verbose);
+KEY_OPT_TRUE(strict);
 
 
 char *
@@ -91,6 +96,7 @@ main (int argc, char *argv[]) {
     "   purge                        purge database of all corrupt and incomplete data\n"
     "   reset                        reset database of all data\n"
     "   count                        get key count\n"
+    "   search [-k <aeg>] [-v <arg>] search for a key or value\n"
   ;
 
   // opts
@@ -98,6 +104,7 @@ main (int argc, char *argv[]) {
   command_option(&program, "-p", "--path <path>", "set the path", path_opt);
   command_option(&program, "-k", "--key <name>", "key to get", key_opt);
   command_option(&program, "-v", "--value <name>", "value to set", value_opt);
+  command_option(&program, "-s", "--strict", "strict mode for a command", strict_opt);
 
   // parse
   command_parse(&program, argc, argv);
@@ -114,6 +121,7 @@ main (int argc, char *argv[]) {
   if (1 == opts.verbose) {
     printf("path set to '%s'\n", opts.path);
   }
+
 
   if (0 == strcmp("init", cmd)) {
 
@@ -364,6 +372,97 @@ main (int argc, char *argv[]) {
     }
 
     printf("%d keys\n", count);
+    sphia_free(sphia);
+
+  } else if (0 == strcmp("search", cmd)) {
+
+    //
+    // $ sphia search [--key <key>] [--value <value>]
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open database");
+      command_free(&program);
+      exit(1);
+    }
+
+    if (NULL == opts.key && NULL == opts.value) {
+      sphia_error("Missing '--key <key>' or '--value <value' flag to match");
+      command_free(&program);
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    int count = 0;
+    int ksize = 0;
+    int vsize = 0;
+    char *key = NULL;
+    char *value = NULL;
+    char *pstr = NULL;
+
+    if (NULL != opts.key) {
+      key = strdup(opts.key);
+      ksize = strlen(opts.key);
+
+      if (NULL != opts.key) {
+        key = case_lower(key);
+      }
+    }
+
+    if (NULL != opts.value) {
+      value = strdup(opts.value);
+      vsize = strlen(opts.value);
+
+      if (1 != opts.strict) {
+        value = case_lower(value);
+      }
+    }
+
+    SPHIA_DB_FOREACH(k, v, sphia->db) {
+      char *tk = trim(strdup(k));
+      char *tv = trim(strdup(v));
+      int match = 0;
+
+      if (1 != opts.strict) {
+        tk = case_lower(tk);
+        tv = case_lower(tv);
+      }
+
+      // printf("%s - %s\n", tk, tv);
+
+      if (NULL != key &&
+          NULL != (pstr = strstr(tk, key))) {
+
+        match = 1;
+        count++;
+
+      } else if (NULL != value &&
+                 NULL != (pstr = strstr(tv, value))) {
+
+        match = 1;
+        count++;
+      }
+
+      if (1 == match) {
+        printf("%s = %s\n", trim(k), trim(v));
+      }
+    }
+
+    if (0 == count) {
+      if (NULL != opts.key) {
+        if (NULL == opts.value) {
+          printf("No search results for key '%s'\n", opts.key);
+        } else {
+          printf("No search results for key '%s' and value '%s'\n", opts.key, opts.value);
+        }
+      } else if (NULL != opts.value) {
+        printf("No search results for value '%s'\n", opts.value);
+      }
+    }
+
+
     sphia_free(sphia);
 
   } else if (strlen(cmd) > 0) {
