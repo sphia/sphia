@@ -315,7 +315,7 @@ main (int argc, char *argv[]) {
     // $ sphia <command> <args>
     //
 
-    char *cargs = trim(strdup(str_flatten(argv, 2, argc)));
+    char *cargs = trim((char *)strdup(str_flatten(argv, 2, argc)));
     char cbin[64];
     char cexe[1024];
     char *child = NULL;

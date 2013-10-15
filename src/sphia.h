@@ -8,10 +8,12 @@
 
 #ifndef __SPHIA_H__
 #define __SPHIA_H__ 1
+#define _BSD_SOURCE 1
 
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sophia.h>
 #include <sp.h>
 
@@ -23,9 +25,9 @@
   void *_c = sp_cursor(_db, SPGT, NULL, 0);                \
   int _s = 0;                                              \
   if (NULL == _c) { _s = 1; sp_destroy(_c); }              \
-  while (0 == _s && sp_fetch(_c) &&                        \
+  while ((0 == _s && sp_fetch(_c) &&                       \
         (_k = (char *) sp_key(_c)) &&                      \
-        (_v = (char *) sp_value(_c))                       \
+        (_v = (char *) sp_value(_c)))                      \
         || sp_destroy(_c))
 
 #define sphia_error(s) {                                   \

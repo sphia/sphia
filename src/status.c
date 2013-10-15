@@ -5,7 +5,6 @@
 // copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
 //
 
-
 #include "status.h"
 #include <sp.h>
 
