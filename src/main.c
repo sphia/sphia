@@ -271,6 +271,7 @@ main (int argc, char *argv[]) {
     sphia = sphia_new(opts.path);
 
     if (NULL == sphia) {
+      sphia_error("Try 'sphia purge'");
       command_free(&program);
       exit(1);
     }
@@ -278,8 +279,10 @@ main (int argc, char *argv[]) {
     rc = sphia_status(sphia);
 
     if (1 == opts.verbose) {
-      printf("status: '%d'\n", rc);
+      printf("rc: '%d'\n", rc);
     }
+
+    printf("status: '%s'\n", (-1 == rc? "OK" : "WARN"));
 
     sphia_free(sphia);
 
