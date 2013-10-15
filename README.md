@@ -91,6 +91,17 @@ Purge a database of all corrupt and incomplete data:
 $ sphia purge --path <path>
 ```
 
+Reset database of all data:
+
+```sh
+$ sphia reset --path <path>
+```
+
+Get key count:
+
+```sh
+$ sphia count --path <path>
+```
 
 ### Options
 

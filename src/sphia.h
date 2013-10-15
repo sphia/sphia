@@ -23,12 +23,12 @@
 #define SPHIA_DB_FOREACH(_k, _v, _db)                      \
   char *_k = NULL, *_v = NULL;                             \
   void *_c = sp_cursor(_db, SPGT, NULL, 0);                \
-  int _s = 0;                                              \
-  if (NULL == _c) { _s = 1; sp_destroy(_c); }              \
+  int _s = 0, _rc = 0;                                     \
+  if (NULL == _c) { _s = 1; (_rc = sp_destroy(_c)); }      \
   while ((0 == _s && sp_fetch(_c) &&                       \
         (_k = (char *) sp_key(_c)) &&                      \
         (_v = (char *) sp_value(_c)))                      \
-        || sp_destroy(_c))
+        || (_rc = sp_destroy(_c)))
 
 #define sphia_error(s) {                                   \
   fprintf(stderr, "error: %s\n", s);                       \
@@ -70,6 +70,7 @@ sphia_free (sphia_t *sphia);
 #include "status.h"
 #include "purge.h"
 #include "reset.h"
+#include "count.h"
 
 #endif
 

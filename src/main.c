@@ -89,6 +89,8 @@ main (int argc, char *argv[]) {
     "   clear                        clears database of all keys\n"
     "   st                           check status of database\n"
     "   purge                        purge database of all corrupt and incomplete data\n"
+    "   reset                        reset database of all data\n"
+    "   count                        get key count\n"
   ;
 
   // opts
@@ -336,6 +338,32 @@ main (int argc, char *argv[]) {
 
     printf("Reset database\n");
 
+    sphia_free(sphia);
+
+  } else if (0 == strcmp("count", cmd)) {
+
+    //
+    // $ sphia count --path <path>
+    //
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open database");
+      command_free(&program);
+      exit(1);
+    }
+
+    int count = sphia_count(sphia);
+
+    if (-1 == count) {
+      sphia_db_error("%s\n", sp_error(sphia->db));
+      command_free(&program);
+      sphia_free(sphia);
+      exit(1);
+    }
+
+    printf("%d keys\n", count);
     sphia_free(sphia);
 
   } else if (strlen(cmd) > 0) {

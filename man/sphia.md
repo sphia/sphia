@@ -28,6 +28,7 @@ sphia(1) -- Command line utility for sophia databases
 
 
 ## COMMANDS
+
   `init`
       initialize a new database
 
@@ -48,6 +49,12 @@ sphia(1) -- Command line utility for sophia databases
 
   `purge`
       purge database of all corrupt and incomplete data
+  
+  `reset`
+      reset database of all data
+
+  `count`
+      get the count      
 
 ## AUTHOR
 
