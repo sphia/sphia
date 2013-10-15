@@ -11,11 +11,12 @@
 
 int
 sphia_set (sphia_t *sphia, char *key, char *value) {
-  int rc = 0;
-
   // trim new lines and etc
   key = trim(key);
   value = trim(value);
-  rc = sp_set(sphia->db, key, strlen(key), value, strlen(value));
-  return rc;
+
+  key[strlen(key)] = '\0';
+  value[strlen(value)] = '\0';
+
+  return sp_set(sphia->db, key, strlen(key), value, strlen(value));
 }

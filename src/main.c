@@ -312,6 +312,32 @@ main (int argc, char *argv[]) {
 
     printf("Purged databased\n");
 
+  } else if (0 == strcmp("reset", cmd)) {
+
+    //
+    // $ sphia reset --path <path>
+    //
+
+    rc = sphia_reset(opts.path);
+
+    if (-1 == rc) {
+      sphia_error("Failed to reset database");
+      command_free(&program);
+      exit(1);
+    }
+
+    sphia = sphia_new(opts.path);
+
+    if (NULL == sphia) {
+      sphia_error("Failed to open database");
+      command_free(&program);
+      exit(1);
+    }
+
+    printf("Reset database\n");
+
+    sphia_free(sphia);
+
   } else if (strlen(cmd) > 0) {
 
     //

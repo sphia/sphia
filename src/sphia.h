@@ -69,7 +69,7 @@ sphia_free (sphia_t *sphia);
 #include "clear.h"
 #include "status.h"
 #include "purge.h"
-
+#include "reset.h"
 
 #endif
 
