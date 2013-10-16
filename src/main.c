@@ -12,7 +12,6 @@
 #include <unistd.h>
 #include "case.h"
 #include "which.h"
-#include "buffer.h"
 #include "sphia.h"
 #include "commander.h"
 
@@ -96,7 +95,7 @@ main (int argc, char *argv[]) {
     "   purge                        purge database of all corrupt and incomplete data\n"
     "   reset                        reset database of all data\n"
     "   count                        get key count\n"
-    "   search [-k <aeg>] [-v <arg>] search for a key or value\n"
+    "   search [-k <arg>] [-v <arg>] search for a key or value\n"
   ;
 
   // opts
