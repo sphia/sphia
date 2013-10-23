@@ -174,7 +174,7 @@ name = 'Joseph Werle'
 
 ## Contributors
 
-See [contributors](https://github.com/visionmedia/express/graphs/contributors)
+See [contributors](https://github.com/sphia/sphia/graphs/contributors)
 
 ### Contributing
 
