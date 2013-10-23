@@ -5,15 +5,19 @@ MANPREFIX ?= "$(PREFIX)/share/man/man1"
 SOPHIA_SRC = $(wildcard sophia/db/*.c)
 REPL_SRC = $(wildcard repl/*.c)
 SRC = $(SOPHIA_SRC) $(REPL_SRC) $(wildcard src/*.c)
+TESTABLE_SOURCES = $(filter-out src/main.c, $(SRC))
+TESTS = $(wildcard test/*.c)
 CFLAGS = -std=c99 -Isophia/db -Irepl -Wall -pthread -march=native -fPIC -fvisibility=hidden  -O2
 
 all: clean test build
 
 clean:
-	rm -f ./sphia
+	rm -fr ./sphia ./test-db ./test-sphia
 
 test:
-	@:
+	$(MAKE) clean
+	$(CC) $(TESTS) $(TESTABLE_SOURCES) $(CFLAGS) -o test-sphia
+	./test-sphia
 
 build:
 	$(CC) $(SRC) $(CFLAGS) -o $(BIN)
