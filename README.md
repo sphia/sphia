@@ -136,7 +136,7 @@ commands:
    purge                        purge database of all corrupt and incomplete data
    reset                        reset database of all data
    count                        get key count
-   search [-k <aeg>] [-v <arg>] search for a key or value
+   search [-k <arg>] [-v <arg>] search for a key or value
 
 options:
   -V, --version                 output program version
