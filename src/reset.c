@@ -21,33 +21,33 @@ sphia_reset (char *path) {
 
 static inline int
 handle_reset (char *path) {
-	DIR *dir = opendir(path);
-	char file[1024];
-	struct dirent *fd;
+  DIR *dir = opendir(path);
+  char file[1024];
+  struct dirent *fd;
   int rc = 0;
 
-	if (NULL == dir) {
-		return -1;
+  if (NULL == dir) {
+    return -1;
   }
 
-	while ((fd = readdir(dir))) {
-		if ('.' == fd->d_name[0]) {
-			continue;
+  while ((fd = readdir(dir))) {
+    if ('.' == fd->d_name[0]) {
+      continue;
     } else if (0 == str_ends_with(fd->d_name, ".log") &&
                0 == str_ends_with(fd->d_name, ".incomplete")) {
       continue;
     }
 
-		snprintf(file, sizeof(file), "%s/%s", path, fd->d_name);
+    snprintf(file, sizeof(file), "%s/%s", path, fd->d_name);
 
-		rc = unlink(file);
+    rc = unlink(file);
 
-		if (-1 == rc) {
-			closedir(dir);
-			return -1;
-		}
-	}
+    if (-1 == rc) {
+      closedir(dir);
+      return -1;
+    }
+  }
 
-	closedir(dir);
+  closedir(dir);
   return rc;
 }
