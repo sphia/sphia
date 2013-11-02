@@ -18,5 +18,5 @@ sphia_set (sphia_t *sphia, char *key, char *value) {
   key[strlen(key)] = '\0';
   value[strlen(value)] = '\0';
 
-  return sp_set(sphia->db, key, strlen(key), value, strlen(value));
+  return sp_set(sphia->db, key, strlen(key) + 1, value, strlen(value) + 1);
 }
