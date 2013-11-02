@@ -1,16 +1,6 @@
 
 #include <stdlib.h>
-#include <stdio.h>
-#include "../src/sphia.h"
-
-// global sphia pointer
-sphia_t *sphia;
-
-static void
-test_setup() {
-  sphia = sphia_new("./test-db");
-  assert(sphia);
-}
+#include "sphia-test.h"
 
 static void
 test_set_get() {
@@ -22,11 +12,6 @@ test_set_get() {
 
   char *actual = sphia_get(sphia, key);
   assert(0 == strcmp(actual, value));
-}
-
-static void
-test_teardown() {
-  sphia_free(sphia);
 }
 
 int

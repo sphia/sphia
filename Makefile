@@ -13,11 +13,14 @@ all: clean test build
 
 clean:
 	rm -fr ./sphia ./test-db ./test-sphia
+	$(foreach test, $(TESTS), rm -f $(basename $(test));)
 
-test:
-	$(MAKE) clean
-	$(CC) $(TESTS) $(TESTABLE_SOURCES) $(CFLAGS) -o test-sphia
-	./test-sphia
+test: clean $(TESTS)
+
+$(TESTS):
+	@$(CC) $@ $(TESTABLE_SOURCES) $(CFLAGS) -o $(basename $@)
+	./$(basename $@)
+	@rm $(basename $@)
 
 build:
 	$(CC) $(SRC) $(CFLAGS) -o $(BIN)
@@ -34,4 +37,4 @@ docs:
 	rm -f man/sphia.1
 	curl -F page=@man/sphia.md http://mantastic.herokuapp.com > man/sphia.1
 
-.PHONY: all clean test build install uninstall
+.PHONY: all clean test build install uninstall $(TESTS)
