@@ -19,4 +19,6 @@
 
 sphia
 test-db
-test-sphia
+
+# ignore compiled tests
+test/*

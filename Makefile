@@ -20,7 +20,6 @@ test: clean $(TESTS)
 $(TESTS):
 	@$(CC) $@ $(TESTABLE_SOURCES) $(CFLAGS) -o $(basename $@)
 	./$(basename $@)
-	@rm $(basename $@)
 
 build:
 	$(CC) $(SRC) $(CFLAGS) -o $(BIN)
