@@ -19,6 +19,6 @@
 
 sphia
 test-db
-
-# ignore compiled tests
 test/*
+
+.vimrc
