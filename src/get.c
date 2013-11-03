@@ -23,8 +23,6 @@ sphia_get (sphia_t *sphia, char *key) {
 
     int ksize = (int) strlen(k);
 
-    if (size != ksize)
-      ksize--;
 
     if (size == ksize) {
       if (0 == strncmp(key, k, ksize) && 0 == strncmp(k, key, size)) {
