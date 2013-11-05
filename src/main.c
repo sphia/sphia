@@ -14,6 +14,7 @@
 #include "which.h"
 #include "sphia.h"
 #include "commander.h"
+#include "str-flatten.h"
 
 
 // global options
@@ -52,9 +53,6 @@ KEY_OPT(value);
 KEY_OPT_TRUE(verbose);
 KEY_OPT_TRUE(strict);
 
-
-char *
-str_flatten (char *array[], int start, int end);
 
 
 int
@@ -503,21 +501,4 @@ main (int argc, char *argv[]) {
 
   command_free(&program);
   return 0;
-}
-
-
-char *
-str_flatten (char *array[], int start, int end) {
-  char *str = malloc(sizeof(char) * (start + end));
-  int i = start;
-  strcat(str, "");
-  for (; i < end; ++i) {
-    strcat(str, array[i]);
-    strcat(str, " ");
-    if (NULL == array[i]) {
-      break;
-     }
-  }
-
-  return str;
 }
