@@ -13,14 +13,16 @@ build: CFLAGS += -O2
 build: src/main
 
 debug: CFLAGS += -g
-debug: LDFLAGS += -DDEBUG
+debug: CPPFLAGS += -DNDEBUG
 debug: src/main
 
 src/main: $(REPL_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(?) $(@).c -o $(BIN) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(BIN) $(LDFLAGS)
 
+$(TESTS): CFLAGS += -g
+$(TESTS): CPPFLAGS += -DNDEBUG
 $(TESTS): $(REPL_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
 
 test: $(TESTS)
 	$(foreach e,$(TESTS:%.c=%),./$(basename $(e));)
