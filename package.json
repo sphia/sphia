@@ -1,7 +1,7 @@
 {
   "name": "sphia",
   "version": "0.0.9",
-  "repo": "jwerle/sphia",
+  "repo": "sphia/sphia",
   "description": "Command line utility for reading a sophia database",
   "keywords": ["sophia", "sphia", "cli", "util"],
   "license": "MIT",

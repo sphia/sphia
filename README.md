@@ -8,20 +8,20 @@ Command utility for operations on a [sophia](https://github.com/pmwkaa/sophia) d
 With [clib](https://github.com/clibs/clib):
 
 ```sh
-$ clib install jwerle/sphia
+$ clib install sphia/sphia
 ```
 
 With git:
 
 ```sh
-$ git clone git@github.com:jwerle/sphia.git /tmp/sphia
-$ cd /tmp/sphia && make install
+$ git clone git@github.com:sphia/sphia.git /tmp/sphia
+$ make -C /tmp/sphia make install
 ```
 
 Via curl:
 
 ```sh
-$ curl -Lo- https://raw.github.com/jwerle/sphia/master/install.sh | bash
+$ curl -Lo- https://raw.github.com/sphia/sphia/master/install.sh | bash
 ```
 
 ## Setup
