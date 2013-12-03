@@ -5,21 +5,15 @@
 #include <assert.h>
 #include "../src/sphia.h"
 
-// global sphia pointer
 sphia_t *sphia;
 
-static void
-test_setup() {
-  sphia = sphia_new("./test-db");
-  assert(sphia != NULL);
-}
-
-static void
-test_teardown() {
-  // empty the db
-  sphia_clear(sphia);
-
-  sphia_free(sphia);
+#define TEST(func) int main(void) { \
+  sphia = sphia_new("./test-db"); \
+  assert(sphia != NULL); \
+  func(); \
+  sphia_clear(sphia); \
+  sphia_free(sphia); \
+  return 0; \
 }
 
 #endif

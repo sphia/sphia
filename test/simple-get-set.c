@@ -14,11 +14,4 @@ test_set_get() {
   assert(0 == strcmp(actual, value));
 }
 
-int
-main(int argc, char *argv[]) {
-  test_setup();
-  test_set_get();
-  test_teardown();
-
-  return 0;
-}
+TEST(test_set_get);
