@@ -7,20 +7,20 @@ REPL_OBJS = $(patsubst %.c,%.o,$(wildcard repl/*.c))
 OBJS = $(filter-out src/main.o, $(patsubst %.c,%.o,$(wildcard src/*.c)))
 TESTS = $(patsubst %.c,%,$(wildcard test/*.c))
 CFLAGS += -std=c99 -Irepl -Wall -Wextra -march=native -fPIC -fvisibility=hidden
+CPPFLAGS += -D_BSD_SOURCE
 LDFLAGS += -pthread -lsophia
 
 build: CFLAGS += -O2
+build: CPPFLAGS += -DNDEBUG
 build: src/main
 
 debug: CFLAGS += -g
-debug: CPPFLAGS += -DNDEBUG
 debug: src/main
 
 src/main: $(REPL_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(BIN) $(LDFLAGS)
 
 $(TESTS): CFLAGS += -g
-$(TESTS): CPPFLAGS += -DNDEBUG
 $(TESTS): $(REPL_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
 
