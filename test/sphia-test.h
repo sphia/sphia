@@ -11,7 +11,7 @@ sphia_t *sphia;
 static void
 test_setup() {
   sphia = sphia_new("./test-db");
-  assert(sphia);
+  assert(sphia != NULL);
 }
 
 static void
