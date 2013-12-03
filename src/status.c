@@ -6,7 +6,7 @@
 //
 
 #include "status.h"
-#include <sp.h>
+#include <sophia/sp.h>
 
 int
 sphia_status (sphia_t *sphia) {

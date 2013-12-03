@@ -5,6 +5,8 @@ Command utility for operations on a [sophia](https://github.com/pmwkaa/sophia) d
 
 ## Install
 
+Before installing sphia, you'll need to install the Sophia libraries.
+
 With [clib](https://github.com/clibs/clib):
 
 ```sh
@@ -26,7 +28,7 @@ $ curl -Lo- https://raw.github.com/sphia/sphia/master/install.sh | bash
 
 ## Setup
 
-Set the `SPHIA_PATH` environment variable for your default database path. 
+Set the `SPHIA_PATH` environment variable for your default database path.
 It will otherwise attempt to read from your current working database.
 
 ```sh
@@ -53,7 +55,7 @@ Initialize a new database with a given path:
 
 ```sh
 $ sphia init --path <path>
-```                         
+```
 
 Get a value by key:
 

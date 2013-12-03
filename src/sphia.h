@@ -14,8 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sophia.h>
-#include <sp.h>
+#include <sophia/sophia.h>
+#include <sophia/sp.h>
 
 
 #define SPHIA_VERSION "0.0.9"
