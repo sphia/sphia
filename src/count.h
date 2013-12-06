@@ -9,8 +9,8 @@
 #ifndef __SPHIA_COUNT_H__
 #define __SPHIA_COUNT_H__ 1
 
+#include <trim/trim.h>
 #include "sphia.h"
-#include "trim.h"
 
 int
 sphia_count (sphia_t *db);

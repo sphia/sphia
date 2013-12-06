@@ -1,6 +1,6 @@
 
 #include <dirent.h>
-#include "str-ends-with.h"
+#include <str-ends-with/str-ends-with.h>
 #include "reset.h"
 #include "purge.h"
 

@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 #include <dirent.h>
-#include "str-ends-with.h"
+#include <str-ends-with/str-ends-with.h>
 #include "purge.h"
 
 static inline int

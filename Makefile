@@ -3,10 +3,10 @@ BIN ?= sphia
 PREFIX ?= /usr/local
 MANPREFIX ?= $(PREFIX)/share/man/man1
 MAN_FILES = $(wildcard man/*.md)
-REPL_OBJS = $(patsubst %.c,%.o,$(wildcard repl/*.c))
+DEPS_OBJS = $(patsubst %.c,%.o,$(wildcard deps/**/*.c))
 OBJS = $(filter-out src/main.o, $(patsubst %.c,%.o,$(wildcard src/*.c)))
 TESTS = $(patsubst %.c,%,$(wildcard test/*.c))
-CFLAGS += -std=c99 -Irepl -Wall -Wextra -march=native -fPIC -fvisibility=hidden
+CFLAGS += -std=c99 -Ideps -Wall -Wextra -march=native -fPIC -fvisibility=hidden
 CPPFLAGS += -D_BSD_SOURCE
 LDFLAGS += -pthread -lsophia
 
@@ -17,11 +17,11 @@ build: src/main
 debug: CFLAGS += -g
 debug: src/main
 
-src/main: $(REPL_OBJS) $(OBJS)
+src/main: $(DEPS_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(BIN) $(LDFLAGS)
 
 $(TESTS): CFLAGS += -g
-$(TESTS): $(REPL_OBJS) $(OBJS)
+$(TESTS): $(DEPS_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
 
 test: $(TESTS)
@@ -37,7 +37,7 @@ uninstall:
 	rm -f $(PREFIX)/bin/$(BIN) $(MANPREFIX)/$(MAN_FILES:man/%.md=%.1)
 
 clean:
-	rm -rf $(REPL_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia
+	rm -rf $(DEPS_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia
 	find test -type f -executable -exec rm -f {} \;
 
 docs: $(MAN_FILES)

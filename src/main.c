@@ -10,11 +10,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "case.h"
-#include "which.h"
+#include <case/case.h>
+#include <which/which.h>
+#include <commander/commander.h>
+#include <str-flatten/str-flatten.h>
 #include "sphia.h"
-#include "commander.h"
-#include "str-flatten.h"
 
 
 // global options
