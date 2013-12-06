@@ -65,13 +65,18 @@ sphia(1) -- Command line utility for sophia databases
 
   - Joseph Werle <joseph.werle@gmail.com>
 
+## CONTRIBUTORS
+
+  - Stephen Mathieson <me@stephenmathieson.com>
+  - Larz Conwell <larzconwell@gmail.com>
+
 ## REPORTING BUGS
 
-  - <https://github.com/jwerle/sphia/issues>
+  - <https://github.com/sphia/sphia/issues>
 
 ## SEE ALSO
 
-  - <https://github.com/jwerle/sphia>
+  - <https://github.com/sphia/sphia>
   - <http://sphia.org>
 
 ## LICENSE

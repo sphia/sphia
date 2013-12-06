@@ -38,7 +38,8 @@ uninstall:
 
 clean:
 	rm -rf $(DEPS_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia
-	find test -type f -executable -exec rm -f {} \;
+	find test -type f -perm +111 -exec rm -f {} \;
+	rm -rf test/*.dSYM
 
 docs: $(MAN_FILES)
 $(MAN_FILES):
