@@ -1,4 +1,11 @@
 
+//
+// reset.c
+//
+// copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
+//
+
+
 #include <dirent.h>
 #include <str-ends-with/str-ends-with.h>
 #include "reset.h"

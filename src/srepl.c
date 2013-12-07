@@ -1,4 +1,11 @@
 
+//
+// srepl.c
+//
+// copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
+//
+
+
 #include "srepl.h"
 
 repl_session_opts opts;
@@ -18,7 +25,7 @@ error (repl_session_t *sess, char *err);
 int
 sphia_repl (sphia_t *sphia) {
   int rc = 0;
- 
+
   opts.prompt = "sphia>";
   opts.eval_cb = eval;
   opts.print_cb = print;
