@@ -9,7 +9,6 @@
 #ifndef __SPHIA_COUNT_H__
 #define __SPHIA_COUNT_H__ 1
 
-#include <trim/trim.h>
 #include "sphia.h"
 
 int

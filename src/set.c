@@ -7,6 +7,7 @@
 
 
 #include <string.h>
+#include <trim/trim.h>
 #include "set.h"
 
 int

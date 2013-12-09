@@ -6,6 +6,8 @@
 //
 
 
+#include <stdio.h>
+#include <repl/repl.h>
 #include "srepl.h"
 
 repl_session_opts opts;

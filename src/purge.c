@@ -5,6 +5,7 @@
 // copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
 //
 
+#include <stdio.h>
 #include <unistd.h>
 #include <dirent.h>
 #include <str-ends-with/str-ends-with.h>

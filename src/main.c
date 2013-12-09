@@ -10,11 +10,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <trim/trim.h>
 #include <case/case.h>
 #include <which/which.h>
 #include <commander/commander.h>
 #include <str-flatten/str-flatten.h>
-#include "sphia.h"
+#include "all.h"
 
 
 // global options
@@ -39,6 +40,7 @@ static struct options opts;
 #define KEY_OPT_TRUE(key)                                  \
   static void key##_opt (command_t *self);                 \
   static void key##_opt (command_t *self) {                \
+    self->arg = "";                                        \
     opts.key = 1;                                          \
   }
 
@@ -389,15 +391,15 @@ main (int argc, char *argv[]) {
     }
 
     int count = 0;
-    int ksize = 0;
-    int vsize = 0;
+    //int ksize = 0;
+    //int vsize = 0;
     char *key = NULL;
     char *value = NULL;
     char *pstr = NULL;
 
     if (NULL != opts.key) {
       key = strdup(opts.key);
-      ksize = strlen(opts.key);
+      //ksize = strlen(opts.key);
 
       if (NULL != opts.key) {
         key = case_lower(key);
@@ -406,7 +408,7 @@ main (int argc, char *argv[]) {
 
     if (NULL != opts.value) {
       value = strdup(opts.value);
-      vsize = strlen(opts.value);
+      //vsize = strlen(opts.value);
 
       if (1 != opts.strict) {
         value = case_lower(value);

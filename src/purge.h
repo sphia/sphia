@@ -9,11 +9,8 @@
 #ifndef __SPHIA_PURGE_H__
 #define __SPHIA_PURGE_H__ 1
 
-#include "sphia.h"
-
 int
 sphia_purge (char *path);
-
 
 #endif
 

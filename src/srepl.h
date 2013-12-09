@@ -9,7 +9,6 @@
 #ifndef __SPHIA_REPL_H__
 #define __SPHIA_REPL_H__ 1
 
-#include "repl/repl.h"
 #include "sphia.h"
 
 int

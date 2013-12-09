@@ -5,7 +5,9 @@
 // copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
 //
 
-
+#include <stddef.h>
+#include <string.h>
+#include <trim/trim.h>
 #include "get.h"
 
 char *

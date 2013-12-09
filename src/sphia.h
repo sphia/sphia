@@ -8,12 +8,8 @@
 
 #ifndef __SPHIA_H__
 #define __SPHIA_H__ 1
-#define _BSD_SOURCE 1
-
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <sophia/sophia.h>
 #include <sophia/sp.h>
 
@@ -62,15 +58,6 @@ sphia_new (char *path);
 void
 sphia_free (sphia_t *sphia);
 
-
-#include "get.h"
-#include "set.h"
-#include "rm.h"
-#include "clear.h"
-#include "status.h"
-#include "purge.h"
-#include "reset.h"
-#include "count.h"
 
 #endif
 
