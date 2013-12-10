@@ -15,7 +15,7 @@
 #include <which/which.h>
 #include <commander/commander.h>
 #include <str-flatten/str-flatten.h>
-#include "all.h"
+#include "api.h"
 
 
 // global options
