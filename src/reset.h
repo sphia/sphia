@@ -6,8 +6,8 @@
 //
 
 
-#ifndef __SPHIA_RESET_H__
-#define __SPHIA_RESET_H__ 1
+#ifndef SPHIA_RESET_H
+#define SPHIA_RESET_H 1
 
 int
 sphia_reset (char *path);

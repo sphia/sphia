@@ -6,8 +6,8 @@
 //
 
 
-#ifndef __SPHIA_PURGE_H__
-#define __SPHIA_PURGE_H__ 1
+#ifndef SPHIA_PURGE_H
+#define SPHIA_PURGE_H 1
 
 int
 sphia_purge (char *path);

@@ -6,8 +6,8 @@
 //
 
 
-#ifndef __SPHIA_STATUS_H__
-#define __SPHIA_STATUS_H__ 1
+#ifndef SPHIA_STATUS_H
+#define SPHIA_STATUS_H 1
 
 #include "sphia.h"
 

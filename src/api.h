@@ -1,13 +1,13 @@
 
 //
-// all.h
+// api.h
 //
 // copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
 //
 
 
-#ifndef __SPHIA_ALL_H__
-#define __SPHIA_ALL_H__ 1
+#ifndef SPHIA_API_H
+#define SPHIA_API_H 1
 
 #include "get.h"
 #include "set.h"

@@ -6,8 +6,8 @@
 //
 
 
-#ifndef __SPHIA_H__
-#define __SPHIA_H__ 1
+#ifndef SPHIA_H
+#define SPHIA_H 1
 
 #include <stdio.h>
 #include <sophia/sophia.h>
