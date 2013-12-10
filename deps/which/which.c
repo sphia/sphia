@@ -38,7 +38,7 @@ which_path(char *name, char *path) {
 
   while (tok) {
     // path
-    int len = strlen(tok) + 1 + strlen(name);
+    int len = strlen(tok) + 2 + strlen(name);
     char *file = malloc(len);
     if (!file) return NULL;
     sprintf(file, "%s/%s", tok, name);

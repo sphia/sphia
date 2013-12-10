@@ -464,10 +464,16 @@ main (int argc, char *argv[]) {
     // $ sphia <command> <args>
     //
 
-    char *cargs = trim((char *)strdup(str_flatten(argv, 2, argc)));
+    char *cargs = malloc(sizeof(char) * program.argc);
     char cbin[64];
     char cexe[1024];
     char *child = NULL;
+    int i = 0;
+    char *p = NULL;
+
+    while (i < program.argc && (NULL != (p = program.argv[i++]))) {
+      strcat(cargs, p);
+    }
 
     sprintf(cbin, "sphia-%s", cmd);
 
@@ -490,10 +496,12 @@ main (int argc, char *argv[]) {
       printf("rc = '%d'\n", rc);
     }
 
-    goto cleanup;
+    free(cargs);
+    command_free(&program);
     exit(rc);
 
   }
+
 
   goto cleanup;
   return 0;
