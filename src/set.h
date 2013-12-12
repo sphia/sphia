@@ -12,7 +12,7 @@
 #include "sphia.h"
 
 int
-sphia_set (sphia_t *db, char *key, char *value);
+sphia_set (sphia_t *, char *, char *);
 
 #endif
 

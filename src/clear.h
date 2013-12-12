@@ -12,6 +12,6 @@
 #include "sphia.h"
 
 int
-sphia_clear (sphia_t *sphia);
+sphia_clear (sphia_t *);
 
 #endif

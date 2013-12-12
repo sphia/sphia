@@ -46,10 +46,8 @@ sphia_new (char *path) {
     return NULL;
   }
 
-
   return sphia;
 }
-
 
 void
 sphia_free (sphia_t *sphia) {

@@ -13,7 +13,6 @@
 #include <sophia/sophia.h>
 #include <sophia/sp.h>
 
-
 #define SPHIA_VERSION "0.0.9"
 
 #define SPHIA_DB_FOREACH(_k, _v, _db)                      \
@@ -36,13 +35,11 @@
   fprintf(stderr, s, ##__VA_ARGS__);                       \
 }
 
-
 #define sphia_db_error(fmt, ...) {                         \
   char s[256];                                             \
   sprintf(s, "%s\n", fmt);                                 \
   fprintf(stderr, s, ##__VA_ARGS__);                       \
 }
-
 
 typedef struct {
   char *path;
@@ -50,14 +47,11 @@ typedef struct {
   void *env;
 } sphia_t;
 
-
 sphia_t *
-sphia_new (char *path);
-
+sphia_new (char *);
 
 void
-sphia_free (sphia_t *sphia);
-
+sphia_free (sphia_t *);
 
 #endif
 

@@ -12,7 +12,7 @@
 #include "sphia.h"
 
 int
-sphia_status (sphia_t *sphia);
+sphia_status (sphia_t *);
 
 #endif
 

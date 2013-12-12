@@ -15,14 +15,13 @@ repl_session_opts opts;
 static sphia_t *sphia_cur = NULL;
 
 static char *
-eval (repl_session_t *sess, char *buf);
+eval (repl_session_t *, char *);
 
 static void
-print (repl_session_t *sess, char *buf);
+print (repl_session_t *, char *);
 
 static void
-error (repl_session_t *sess, char *err);
-
+error (repl_session_t *, char *);
 
 int
 sphia_repl (sphia_t *sphia) {

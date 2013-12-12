@@ -11,16 +11,15 @@
 #include <str-ends-with/str-ends-with.h>
 #include "purge.h"
 
-static inline int
-handle_purge (char *path);
+static int
+handle_purge (char *);
 
 int
 sphia_purge (char *path) {
   return handle_purge(path);
 }
 
-
-static inline int
+static int
 handle_purge (char *path) {
   DIR *dir = opendir(path);
   char file[1024];

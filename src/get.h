@@ -12,7 +12,7 @@
 #include "sphia.h"
 
 char *
-sphia_get (sphia_t *db, char *key);
+sphia_get (sphia_t *, char *);
 
 #endif
 

@@ -12,19 +12,15 @@
 
 char *
 sphia_get (sphia_t *sphia, char *key) {
-  int size = (int) strlen(key);
-
-  // trim new lines and etc
+  size_t size = strlen(key);
   key = trim(key);
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
     k[sp_keysize(_c)] = '\0';
-
-    if (NULL == v)
+    if (NULL == v) {
       continue;
-
-    int ksize = (int) strlen(k);
-
+    }
+    size_t ksize = strlen(k);
 
     if (size == ksize) {
       if (0 == strncmp(key, k, ksize) && 0 == strncmp(k, key, size)) {

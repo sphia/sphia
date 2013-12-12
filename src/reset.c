@@ -13,8 +13,8 @@
 #include "purge.h"
 #include "reset.h"
 
-static inline int
-handle_reset (char *path);
+static int
+handle_reset (char *);
 
 int
 sphia_reset (char *path) {
@@ -28,7 +28,7 @@ sphia_reset (char *path) {
 }
 
 
-static inline int
+static int
 handle_reset (char *path) {
   DIR *dir = opendir(path);
   char file[1024];

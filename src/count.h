@@ -12,6 +12,6 @@
 #include "sphia.h"
 
 int
-sphia_count (sphia_t *db);
+sphia_count (sphia_t *);
 
 #endif

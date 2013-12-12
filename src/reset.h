@@ -10,7 +10,7 @@
 #define SPHIA_RESET_H 1
 
 int
-sphia_reset (char *path);
+sphia_reset (char *);
 
 #endif
 

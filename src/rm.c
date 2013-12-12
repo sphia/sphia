@@ -11,14 +11,14 @@
 
 int
 sphia_rm (sphia_t *sphia, char *key) {
-  int size = 0;
+  size_t size = 0;
   int rc = 0;
   int i = 0;
   int count = 0;
   char *keys[4096];
 
   if (NULL != key) {
-    size = (int) strlen(key);
+    size = strlen(key);
   }
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
@@ -37,7 +37,7 @@ sphia_rm (sphia_t *sphia, char *key) {
     if (NULL == v)
       continue;
 
-    int ksize = (int) strlen(k);
+    size_t ksize = strlen(k);
 
     if (size != ksize)
       ksize--;
