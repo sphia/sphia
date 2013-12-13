@@ -10,7 +10,7 @@
 #include "rm.h"
 
 int
-sphia_rm (sphia_t *sphia, char *key) {
+sphia_rm (sphia_t *sphia, const char *key) {
   size_t size = 0;
   int rc = 0;
   int i = 0;

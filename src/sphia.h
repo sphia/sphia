@@ -42,13 +42,13 @@
 }
 
 typedef struct {
-  char *path;
+  const char *path;
   void *db;
   void *env;
 } sphia_t;
 
 sphia_t *
-sphia_new (char *);
+sphia_new (const char *);
 
 void
 sphia_free (sphia_t *);

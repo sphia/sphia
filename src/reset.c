@@ -14,10 +14,10 @@
 #include "reset.h"
 
 static int
-handle_reset (char *);
+handle_reset (const char *);
 
 int
-sphia_reset (char *path) {
+sphia_reset (const char *path) {
   int rc = sphia_purge(path);
 
   if (0 == rc) {
@@ -29,7 +29,7 @@ sphia_reset (char *path) {
 
 
 static int
-handle_reset (char *path) {
+handle_reset (const char *path) {
   DIR *dir = opendir(path);
   char file[1024];
   struct dirent *fd;

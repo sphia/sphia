@@ -11,7 +11,7 @@
 #include "sphia.h"
 
 sphia_t *
-sphia_new (char *path) {
+sphia_new (const char *path) {
   int rc = 0;
   sphia_t *sphia = malloc(sizeof(sphia_t));
   if (NULL == sphia) return NULL;

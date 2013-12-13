@@ -10,7 +10,7 @@
 #define SPHIA_RESET_H 1
 
 int
-sphia_reset (char *);
+sphia_reset (const char *);
 
 #endif
 

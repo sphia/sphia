@@ -12,15 +12,15 @@
 #include "purge.h"
 
 static int
-handle_purge (char *);
+handle_purge (const char *);
 
 int
-sphia_purge (char *path) {
+sphia_purge (const char *path) {
   return handle_purge(path);
 }
 
 static int
-handle_purge (char *path) {
+handle_purge (const char *path) {
   DIR *dir = opendir(path);
   char file[1024];
   struct dirent *fd;

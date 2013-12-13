@@ -51,6 +51,7 @@ GEN_CMD(get) {
     return 1;
   }
 
+  opts.key = trim(opts.key);
   char *value = sphia_get(sphia, opts.key);
   if (NULL == value) {
     char *msg = sp_error(sphia->db);
@@ -78,6 +79,8 @@ GEN_CMD(set) {
     return 1;
   }
 
+  opts.key = trim(opts.key);
+  opts.value = trim(opts.value);
   int rc = sphia_set(sphia, opts.key, opts.value);
   if (-1 == rc) {
     sphia_ferror("An error occured setting key '%s'. %s", opts.key, sp_error(sphia->db));

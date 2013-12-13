@@ -7,13 +7,11 @@
 
 #include <stddef.h>
 #include <string.h>
-#include <trim/trim.h>
 #include "get.h"
 
 char *
-sphia_get (sphia_t *sphia, char *key) {
+sphia_get (sphia_t *sphia, const char *key) {
   size_t size = strlen(key);
-  key = trim(key);
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
     k[sp_keysize(_c)] = '\0';

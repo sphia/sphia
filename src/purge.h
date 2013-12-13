@@ -10,7 +10,7 @@
 #define SPHIA_PURGE_H 1
 
 int
-sphia_purge (char *);
+sphia_purge (const char *);
 
 #endif
 
