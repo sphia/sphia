@@ -363,8 +363,8 @@ main (int argc, char *argv[]) {
         sphia = sphia_new(opts.path);
         if (NULL == sphia) {
           sphia_ferror("Error initializing sophia database to path '%s'", opts.path);
+          rc = 1;
           goto cleanup;
-          return 1;
         }
       }
 
@@ -376,7 +376,6 @@ main (int argc, char *argv[]) {
         sphia_free(sphia);
       }
       goto cleanup;
-      return rc;
     }
   }
 
@@ -395,8 +394,8 @@ main (int argc, char *argv[]) {
   cargs = malloc(size);
   if (NULL == cargs) {
     sphia_error("Unable to allocate memory");
+    rc = 1;
     goto cleanup;
-    return 1;
   }
 
   // Retrieve arguments separated by spaces
@@ -416,9 +415,9 @@ main (int argc, char *argv[]) {
   loc = which(trim(cexe));
   if (NULL == loc) {
     sphia_ferror("'%s' not a sphia command.\nSee sphia --help for more information.", cmd);
+    rc = 1;
     free(cargs);
     goto cleanup;
-    return 1;
   }
   if (1 == opts.verbose) {
     printf("absolute command path '%s'\n", cexe);
@@ -429,8 +428,8 @@ main (int argc, char *argv[]) {
   free(loc);
   free(cargs);
   goto cleanup;
-  return rc;
 
 cleanup:
   command_free(&program);
+  return rc;
 }
