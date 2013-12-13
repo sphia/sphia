@@ -18,7 +18,6 @@ sphia_count (sphia_t *sphia) {
     }
   }
 
-  // from macro
   if (0 != _rc) {
     return _rc;
   }

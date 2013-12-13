@@ -9,45 +9,12 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <str-ends-with/str-ends-with.h>
+#include "remove-files.h"
 #include "purge.h"
 
-// Remove all files in the given path ending with ".log", returns
-// -1 on error.
-static int
-handle_purge (const char *);
+static char *extensions[] = {".log"};
 
 int
 sphia_purge (const char *path) {
-  return handle_purge(path);
-}
-
-static int
-handle_purge (const char *path) {
-  DIR *dir = opendir(path);
-  char file[1024];
-  struct dirent *fd;
-  int rc = 0;
-
-  if (NULL == dir) {
-    return -1;
-  }
-
-  while ((fd = readdir(dir))) {
-    if ('.' == fd->d_name[0]) {
-      continue;
-    } else if (str_ends_with(fd->d_name, ".log")) {
-      continue;
-    }
-
-    snprintf(file, sizeof(file), "%s/%s", path, fd->d_name);
-
-    rc = unlink(file);
-    if (-1 == rc) {
-      closedir(dir);
-      return -1;
-    }
-  }
-
-  rc = closedir(dir);
-  return rc;
+  return remove_files(path, extensions, 1);
 }
