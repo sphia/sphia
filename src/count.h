@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Get number of keys, returns -1 on error.
 int
 sphia_count (sphia_t *);
 

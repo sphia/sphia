@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Start a repl session for the database, returns -1 on error.
 int
 sphia_repl (sphia_t *);
 

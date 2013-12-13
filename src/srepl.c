@@ -14,12 +14,15 @@ repl_session_opts opts;
 
 static sphia_t *sphia_cur = NULL;
 
+// Print message returning NULL.
 static char *
 eval (repl_session_t *, char *);
 
+// Print message to the sessions stdout.
 static void
 print (repl_session_t *, char *);
 
+// Print message prefixed with "error:" to the sessions stderr.
 static void
 error (repl_session_t *, char *);
 

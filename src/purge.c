@@ -11,6 +11,8 @@
 #include <str-ends-with/str-ends-with.h>
 #include "purge.h"
 
+// Remove all files in the given path ending with ".log", returns
+// -1 on error.
 static int
 handle_purge (const char *);
 

@@ -9,6 +9,7 @@
 #ifndef SPHIA_RESET_H
 #define SPHIA_RESET_H 1
 
+// Reset database path of all data, returns -1 on error.
 int
 sphia_reset (const char *);
 

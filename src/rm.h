@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Remove the given key, returns -1 on error.
 int
 sphia_rm (sphia_t *, const char *);
 

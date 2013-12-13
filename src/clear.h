@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Clear database of all keys, returns -1 on error.
 int
 sphia_clear (sphia_t *);
 

@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Return the status of the database, -1 indicates ok while 0 is an error.
 int
 sphia_status (sphia_t *);
 

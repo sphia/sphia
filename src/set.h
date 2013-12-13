@@ -11,6 +11,7 @@
 
 #include "sphia.h"
 
+// Set the key with the given value, returns -1 on error.
 int
 sphia_set (sphia_t *, const char *, const char *);
 

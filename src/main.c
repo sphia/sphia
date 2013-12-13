@@ -35,8 +35,6 @@ static const char *usage =
   "   count                        get key count\n"
   "   search [-k <arg>] [-v <arg>] search for a key or value\n";
 
-static options_t opts;
-
 KEY_OPT(path);
 KEY_OPT(key);
 KEY_OPT(value);
@@ -318,6 +316,7 @@ static cmd_t cmds[] = {
   {"search", NULL, 1, cmd_search},
 };
 
+// Parse the given argv with the appropriate options.
 static void
 parse_opts (command_t *, int, char *[]);
 static void

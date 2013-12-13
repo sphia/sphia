@@ -13,6 +13,8 @@
 #include "purge.h"
 #include "reset.h"
 
+// Remove all files in the given path ending in either ".log"
+// or ".incomplete", returns -1 on error.
 static int
 handle_reset (const char *);
 
