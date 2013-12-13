@@ -51,7 +51,7 @@ sphia_new (char *path) {
 
 void
 sphia_free (sphia_t *sphia) {
-  sp_destroy(sphia->env);
   sp_destroy(sphia->db);
+  sp_destroy(sphia->env);
   free(sphia);
 }
