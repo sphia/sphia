@@ -349,6 +349,11 @@ main (int argc, char *argv[]) {
   if (NULL == opts.path) {
     if (NULL == default_path) {
       opts.path = getcwd(tmp, sizeof(tmp));
+      if (NULL == opts.path) {
+        sphia_error("Unable to get current directory");
+        rc = 1;
+        goto cleanup;
+      }
     } else {
       opts.path = default_path;
     }

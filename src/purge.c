@@ -40,13 +40,12 @@ handle_purge (const char *path) {
     snprintf(file, sizeof(file), "%s/%s", path, fd->d_name);
 
     rc = unlink(file);
-
     if (-1 == rc) {
       closedir(dir);
       return -1;
     }
   }
 
-  closedir(dir);
+  rc = closedir(dir);
   return rc;
 }
