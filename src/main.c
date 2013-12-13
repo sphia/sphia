@@ -280,6 +280,13 @@ GEN_CMD(search) {
     free(tv);
   }
 
+  if (0 != _rc) {
+    sphia_db_error("%s\n", sp_error(sphia->db));
+    free(key);
+    free(value);
+    return 1;
+  }
+
   if (0 == count) {
     if (NULL != opts.key) {
       if (NULL == opts.value) {

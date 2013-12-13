@@ -59,6 +59,10 @@ sphia_rm (sphia_t *sphia, const char *key) {
     }
   }
 
+  if (0 != _rc) {
+    return _rc;
+  }
+
   if (NULL == key) {
     // `sp_destroy(void *o)` already called
     for (i = 0; i < count; ++i) {
