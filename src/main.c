@@ -19,7 +19,7 @@
 
 static const char *usage =
   "<command> [--key <key>] [--value <value>] [--path <path>]\n"
-  "                       [--version] [--help]"
+  "                       [--config <config>] [--version] [--help]"
 
   "\n\n"
   "commands:\n"
@@ -40,6 +40,15 @@ KEY_OPT(key);
 KEY_OPT(value);
 KEY_OPT_BOOL(verbose);
 KEY_OPT_BOOL(strict);
+
+static void config_opt (command_t *);
+static void config_opt (command_t *self) {
+  opts.config = (char *)self->arg;
+  int rc = read_options(&opts, self->arg, 1);
+  if (-1 == rc) {
+    sphia_db_error("Failed to read config path %s.", self->arg);
+  }
+}
 
 GEN_CMD(get) {
   // $ sphia get --key foo --path ~db/
@@ -317,13 +326,35 @@ static cmd_t cmds[] = {
 };
 
 // Parse the given argv with the appropriate options.
-static void
+static int
 parse_opts (command_t *, int, char *[]);
-static void
+static int
 parse_opts (command_t *commander, int argc, char *argv[]) {
+  int hasConfig = 0;
+
+  // If a config option is not set, read default config file.
+  for (int i = 0; i < argc; i++) {
+    if (0 == strcmp("-c", argv[i]) || 0 == strcmp("--config", argv[i])) {
+      hasConfig = 1;
+      break;
+    }
+  }
+  if (0 == hasConfig) {
+    char *default_dir = getenv(DEFAULT_OPT_ENV);
+    char config_path[256];
+    if (NULL != default_dir) {
+      sprintf(config_path, "%s/.sphiarc", default_dir);
+      opts.config = config_path;
+      if (-1 == read_options(&opts, config_path, 0)) {
+        return -1;
+      }
+    }
+  }
+
   command_init(commander, "sphia", SPHIA_VERSION);
 
   commander->usage = usage;
+  command_option(commander, "-c", "--config <config>", "read a config file", config_opt);
   command_option(commander, "-v", "--verbose", "enable verbose output", verbose_opt);
   command_option(commander, "-p", "--path <path>", "set the path", path_opt);
   command_option(commander, "-k", "--key <name>", "key to get", key_opt);
@@ -331,6 +362,7 @@ parse_opts (command_t *commander, int argc, char *argv[]) {
   command_option(commander, "-s", "--strict", "strict mode for a command", strict_opt);
 
   command_parse(commander, argc, argv);
+  return 0;
 }
 
 int
@@ -342,7 +374,11 @@ main (int argc, char *argv[]) {
   sphia_t *sphia = NULL;
   command_t program;
 
-  parse_opts(&program, argc, argv);
+  rc = parse_opts(&program, argc, argv);
+  if (-1 == rc) {
+    sphia_error("Couldn't parse options");
+    return 1;
+  }
 
   // Display help if no cmd
   if (program.argc <= 0 || strlen(program.argv[0]) <= 0) {
@@ -351,17 +387,16 @@ main (int argc, char *argv[]) {
     cmd = program.argv[0];
   }
 
-  // Default to SPHIA_PATH or cwd
+  // Use SPHIA_PATH if given, otherwise cwd if no path.
+  if (NULL != default_path) {
+    opts.path = default_path;
+  }
   if (NULL == opts.path) {
-    if (NULL == default_path) {
-      opts.path = getcwd(tmp, sizeof(tmp));
-      if (NULL == opts.path) {
-        sphia_error("Unable to get current directory");
-        rc = 1;
-        goto cleanup;
-      }
-    } else {
-      opts.path = default_path;
+    opts.path = getcwd(tmp, sizeof(tmp));
+    if (NULL == opts.path) {
+      sphia_error("Unable to get current directory");
+      rc = 1;
+      goto cleanup;
     }
   }
 

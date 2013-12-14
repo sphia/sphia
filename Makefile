@@ -1,5 +1,4 @@
 CC ?= cc
-BIN ?= sphia
 PREFIX ?= /usr/local
 MANPREFIX ?= $(PREFIX)/share/man/man1
 MAN_FILES = $(wildcard man/*.md)
@@ -18,7 +17,7 @@ debug: CFLAGS += -g
 debug: src/main
 
 src/main: $(DEPS_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(BIN) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o sphia $(LDFLAGS)
 
 $(TESTS): CFLAGS += -g
 $(TESTS): $(DEPS_OBJS) $(OBJS)
@@ -29,15 +28,15 @@ test: $(TESTS)
 
 install: $(MAN_FILES) build
 	mkdir -p $(PREFIX)/bin
-	install $(BIN) $(PREFIX)/bin
+	install sphia $(PREFIX)/bin
 	mkdir -p $(MANPREFIX)
 	install $(MAN_FILES:%.md=%.1) $(MANPREFIX)
 
 uninstall:
-	rm -f $(PREFIX)/bin/$(BIN) $(MANPREFIX)/$(MAN_FILES:man/%.md=%.1)
+	rm -f $(PREFIX)/bin/sphia $(MANPREFIX)/$(MAN_FILES:man/%.md=%.1)
 
 clean:
-	rm -rf $(DEPS_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia
+	rm -rf $(DEPS_OBJS) $(OBJS) sphia man/*.1 test-db test-sphia
 	find test -type f -perm +111 -exec rm -f {} \;
 	rm -rf test/*.dSYM
 

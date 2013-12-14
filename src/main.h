@@ -10,16 +10,8 @@
 #define SPHIA_MAIN_H 1
 
 #include <commander/commander.h>
+#include "options.h"
 #include "sphia.h"
-
-// Defines various command line options.
-typedef struct {
-  char *path;
-  char *key;
-  char *value;
-  int verbose;
-  int strict;
-} options_t;
 
 // Function pointer to define functions for commands.
 typedef int (*cmd_func_t)(sphia_t *);
@@ -33,6 +25,13 @@ typedef struct {
 } cmd_t;
 
 static options_t opts;
+
+#ifdef _WIN32
+#define DEFAULT_OPT_ENV "APPDATA"
+#else
+#define DEFAULT_OPT_ENV "HOME"
+#endif
+
 
 // Creates a function that sets the key with the given
 // command value.
