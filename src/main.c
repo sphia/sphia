@@ -343,7 +343,7 @@ parse_opts (command_t *commander, int argc, char *argv[]) {
     char *default_dir = getenv(DEFAULT_OPT_ENV);
     char config_path[256];
     if (NULL != default_dir) {
-      sprintf(config_path, "%s/.sphiarc", default_dir);
+      sprintf(config_path, "%s/.%src", default_dir, BIN_NAME);
       opts.config = config_path;
       if (-1 == read_options(&opts, config_path, 0)) {
         return -1;
