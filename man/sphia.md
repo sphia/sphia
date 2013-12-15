@@ -4,7 +4,7 @@ sphia(1) -- Command line utility for sophia databases
 ## SYNOPSIS
 
 `sphia` <command> [--key <key>] [--value <value>] [--path <path>]
-                [--version] [--help]
+                [--config <config>] [--version] [--help]
 
 ## OPTIONS
 
@@ -25,6 +25,9 @@ sphia(1) -- Command line utility for sophia databases
 
   -v, --value <name>
       value to set
+
+  -c, --config <path>
+      read a config file
 
   -s, --strict
       enable strict mode for a command
@@ -51,7 +54,7 @@ sphia(1) -- Command line utility for sophia databases
 
   `purge`
       purge database of all corrupt and incomplete data
-  
+
   `reset`
       reset database of all data
 
@@ -59,7 +62,7 @@ sphia(1) -- Command line utility for sophia databases
       get the count
 
   `search`
-      search for a key or value      
+      search for a key or value
 
 ## AUTHOR
 
