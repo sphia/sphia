@@ -1,15 +1,17 @@
 
 //
-// remove-files.c
+// file.c
 //
 // copyright (c) 2013 joseph werle <joseph.werle@gmail.com>
 //
 
 #include <stdio.h>
+#include <errno.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <sys/stat.h>
 #include <str-ends-with/str-ends-with.h>
-#include "remove-files.h"
+#include "file.h"
 
 int
 remove_files (const char *path, char *extensions[], int len) {
@@ -52,4 +54,16 @@ remove_files (const char *path, char *extensions[], int len) {
 
   rc = closedir(dir);
   return rc;
+}
+
+int
+file_exists (const char *path) {
+  int rc = 0;
+
+  rc = stat(path, NULL);
+  if (-1 == rc && ENOENT == errno) {
+    return 0;
+  }
+
+  return 1;
 }

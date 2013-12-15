@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <str-ends-with/str-ends-with.h>
-#include "remove-files.h"
+#include "file.h"
 #include "purge.h"
 #include "reset.h"
 

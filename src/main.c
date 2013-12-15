@@ -14,6 +14,7 @@
 #include <case/case.h>
 #include <which/which.h>
 #include <str-flatten/str-flatten.h>
+#include "file.h"
 #include "api.h"
 #include "main.h"
 
@@ -43,10 +44,11 @@ KEY_OPT_BOOL(strict);
 
 static void config_opt (command_t *);
 static void config_opt (command_t *self) {
-  opts.config = (char *)self->arg;
   int rc = read_options(&opts, self->arg, 1);
   if (-1 == rc) {
     sphia_db_error("Failed to read config path %s.", self->arg);
+  } else {
+    opts.config = (char *)self->arg;
   }
 }
 
@@ -340,13 +342,25 @@ parse_opts (command_t *commander, int argc, char *argv[]) {
     }
   }
   if (0 == hasConfig) {
-    char *default_dir = getenv(DEFAULT_OPT_ENV);
     char config_path[256];
-    if (NULL != default_dir) {
-      sprintf(config_path, "%s/.%src", default_dir, BIN_NAME);
-      opts.config = config_path;
+    char *default_path = getenv(DEFAULT_OPT_ENV);
+    char *cwd = getcwd(config_path, sizeof(config_path));
+    if (NULL != cwd) {
+      sprintf(config_path, "%s/.%src", config_path, BIN_NAME);
+    }
+
+    if (NULL != cwd && 1 == file_exists(config_path)) {
       if (-1 == read_options(&opts, config_path, 0)) {
         return -1;
+      } else {
+        opts.config = config_path;
+      }
+    } else if (NULL != default_path) {
+      sprintf(config_path, "%s/.%src", default_path, BIN_NAME);
+      if (-1 == read_options(&opts, config_path, 0)) {
+        return -1;
+      } else {
+        opts.config = config_path;
       }
     }
   }
