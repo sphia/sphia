@@ -369,7 +369,7 @@ parse_opts (command_t *commander, int argc, char *argv[]) {
 
   commander->usage = usage;
   command_option(commander, "-c", "--config <config>", "read a config file", config_opt);
-  command_option(commander, "-v", "--verbose", "enable verbose output", verbose_opt);
+  command_option(commander, "", "--verbose", "enable verbose output", verbose_opt);
   command_option(commander, "-p", "--path <path>", "set the path", path_opt);
   command_option(commander, "-k", "--key <name>", "key to get", key_opt);
   command_option(commander, "-v", "--value <name>", "value to set", value_opt);
