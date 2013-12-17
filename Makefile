@@ -22,10 +22,12 @@ src/main: $(DEPS_OBJS) $(OBJS)
 
 $(TESTS): CFLAGS += -g
 $(TESTS): $(DEPS_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
 
 test: $(TESTS)
-	$(foreach e,$(TESTS:%.c=%),./$(basename $(e));)
+	@echo "\nRunning sphia tests"
+	@$(foreach e,$(TESTS:%.c=%),./$(basename $(e)) && echo "  ✓ $(e)";)
+	@echo
 
 install: $(MAN_FILES) build
 	mkdir -p $(PREFIX)/bin
