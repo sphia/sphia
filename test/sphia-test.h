@@ -3,7 +3,7 @@
 #define __SPHIA_TEST_H__ 1
 
 #include <assert.h>
-#include "../src/sphia.h"
+#include "../src/api.h"
 
 sphia_t *sphia;
 
