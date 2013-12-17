@@ -7,7 +7,6 @@
 
 
 #include <stdlib.h>
-#include <assert.h>
 #include "sphia.h"
 
 sphia_t *
@@ -17,7 +16,7 @@ sphia_new (const char *path) {
   if (NULL == sphia) return NULL;
   sphia->path = path;
   sphia->env = sp_env();
-  assert(sphia->env);
+  if (!sphia->env) return NULL;
   rc = sp_ctl(sphia->env, SPDIR, SPO_CREAT|SPO_RDWR, path);
 
   if (-1 == rc) {
