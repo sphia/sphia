@@ -26,7 +26,7 @@ $(TESTS): $(DEPS_OBJS) $(OBJS)
 
 test: $(TESTS)
 	@echo "\nRunning sphia tests"
-	@$(foreach e,$(TESTS:%.c=%),./$(basename $(e)) && echo "  ✓ $(e)";)
+	@$(foreach e, $(TESTS:%.c=%), ./$(basename $(e)) && echo "  ✓ $(e)";)
 	@echo
 
 install: $(MAN_FILES) build

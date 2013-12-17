@@ -14,7 +14,6 @@ test_similar_keys() {
   assert(-1 != sphia_set(sphia, k2, v2));
 
   char *res = sphia_get(sphia, k1);
-  printf("%s == %s\n", v1, res);
   assert(0 == strcmp(v1, res));
 }
 

@@ -1,9 +1,26 @@
 
-#ifndef __SPHIA_TEST_H__
-#define __SPHIA_TEST_H__ 1
+#ifndef SPHIA_TEST_H
+#define SPHIA_TEST_H 1
 
-#include <assert.h>
 #include "../src/api.h"
+
+int __failed_assertions = 0;
+
+/*
+ * Simple assertion macro which records
+ * count of failed assertions
+ */
+
+#define assert(expr) ({ \
+  if (!(expr)) { \
+    __failed_assertions++; \
+    fprintf(stderr \
+      , "Assertion error: %s (%s:%d)\n" \
+      , #expr \
+      , __FILE__ \
+      , __LINE__); \
+  } \
+})
 
 sphia_t *sphia;
 
@@ -11,9 +28,9 @@ sphia_t *sphia;
   sphia = sphia_new("./test-db"); \
   assert(sphia != NULL); \
   func(); \
-  sphia_clear(sphia); \
+  assert(-1 != sphia_clear(sphia)); \
   sphia_free(sphia); \
-  return 0; \
+  return __failed_assertions; \
 }
 
 #endif
