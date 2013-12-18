@@ -33,6 +33,7 @@ travis:
 	git clone --depth=1 git@github.com:pmwkaa/sophia.git sophia
 	$(MAKE) -C sophia/db
 	mv sophia/db sophia/sophia
+	rm -f sophia/sophia/*.so*
 	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) test
 
 install: $(MAN_FILES) build
