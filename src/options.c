@@ -12,6 +12,8 @@
 #include <inih/ini.h>
 #include "options.h"
 
+static int freePath = 0;
+
 // Handles each option in an ini file, first argument being the struct
 // we're marshalling, then the section, the name for the value, and finally
 // the value.
@@ -32,7 +34,12 @@ read_options(options_t *opts, const char *path, int required) {
   int rc = ini_parse_file(file, handler, opts);
 
   fclose(file);
-  return rc;
+  if (0 != rc) {
+    // ini_parse_file returns multiple negative numbers on error.
+    return -1;
+  }
+
+  return 0 == freePath ? 0 : 1;
 }
 
 static int
@@ -46,6 +53,7 @@ handler (void *opts_g, const char *section, const char *name, const char *value)
       return 0;
     }
 
+    freePath = 1;
     opts->path = path;
   } else if (MATCH("", "verbose")) {
     opts->verbose = atoi(value);

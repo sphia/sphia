@@ -14,7 +14,7 @@
 int
 remove_files (const char *, char *[], int);
 
-// Check if a file exists, returns 1 if it does, and 0 if not.
+// Check if a file exists, returns 1 if it does, and 0 if not, -1 if any errors.
 int
 file_exists (const char *);
 

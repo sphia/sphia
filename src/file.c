@@ -6,6 +6,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <unistd.h>
 #include <dirent.h>
@@ -58,9 +59,14 @@ remove_files (const char *path, char *extensions[], int len) {
 
 int
 file_exists (const char *path) {
+  struct stat *stats = malloc(sizeof(struct stat));
   int rc = 0;
+  if (NULL == stats) {
+    return -1;
+  }
 
-  rc = stat(path, NULL);
+  rc = stat(path, stats);
+  free(stats);
   if (-1 == rc && ENOENT == errno) {
     return 0;
   }
