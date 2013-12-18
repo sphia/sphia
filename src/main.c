@@ -18,6 +18,7 @@
 #include "api.h"
 #include "main.h"
 
+static int freePath = 0;
 static const char *usage =
   "<command> [--key <key>] [--value <value>] [--path <path>]\n"
   "                       [--config <config>] [--version] [--help]"
@@ -36,11 +37,20 @@ static const char *usage =
   "   count                        get key count\n"
   "   search [-k <arg>] [-v <arg>] search for a key or value\n";
 
-KEY_OPT(path);
 KEY_OPT(key);
 KEY_OPT(value);
 KEY_OPT_BOOL(verbose);
 KEY_OPT_BOOL(strict);
+
+static void path_opt (command_t *);
+static void path_opt (command_t *self) {
+  if (1 == freePath) {
+    free(opts.path);
+    freePath = 0;
+  }
+
+  opts.path = (char *)self->arg;
+}
 
 static void config_opt (command_t *);
 static void config_opt (command_t *self) {
@@ -49,6 +59,10 @@ static void config_opt (command_t *self) {
     sphia_db_error("Failed to read config path %s.", self->arg);
   } else {
     opts.config = (char *)self->arg;
+  }
+
+  if (1 == rc) {
+    freePath = 1;
   }
 }
 
@@ -333,6 +347,7 @@ parse_opts (command_t *, int, char *[]);
 static int
 parse_opts (command_t *commander, int argc, char *argv[]) {
   int hasConfig = 0;
+  int rc = 0;
 
   // If a config option is not set, read default config file.
   for (int i = 0; i < argc; i++) {
@@ -350,17 +365,27 @@ parse_opts (command_t *commander, int argc, char *argv[]) {
     }
 
     if (NULL != cwd && 1 == file_exists(config_path)) {
-      if (-1 == read_options(&opts, config_path, 0)) {
+      rc = read_options(&opts, config_path, 0);
+      if (-1 == rc) {
         return -1;
       } else {
         opts.config = config_path;
       }
+
+      if (1 == rc) {
+        freePath = 1;
+      }
     } else if (NULL != default_path) {
       sprintf(config_path, "%s/.%src", default_path, BIN_NAME);
-      if (-1 == read_options(&opts, config_path, 0)) {
+      rc = read_options(&opts, config_path, 0);
+      if (-1 == rc) {
         return -1;
       } else {
         opts.config = config_path;
+      }
+
+      if (1 == rc) {
+        freePath = 1;
       }
     }
   }
@@ -403,6 +428,11 @@ main (int argc, char *argv[]) {
 
   // Use SPHIA_PATH if given, otherwise cwd if no path.
   if (NULL != default_path) {
+    if (1 == freePath) {
+      free(opts.path);
+      freePath = 0;
+    }
+
     opts.path = default_path;
   }
   if (NULL == opts.path) {
@@ -493,6 +523,9 @@ main (int argc, char *argv[]) {
   goto cleanup;
 
 cleanup:
+  if (1 == freePath) {
+    free(opts.path);
+  }
   command_free(&program);
   return rc;
 }
