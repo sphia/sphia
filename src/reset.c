@@ -18,11 +18,6 @@ static char *extensions[] = {".log", ".incomplete"};
 
 int
 sphia_reset (const char *path) {
-  int rc = sphia_purge(path);
-
-  if (0 == rc) {
-    return remove_files(path, extensions, 2);
-  } else {
-    return remove_files(path, extensions, 2);
-  }
+  sphia_purge(path);
+  return remove_files(path, extensions, 2);
 }

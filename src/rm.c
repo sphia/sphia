@@ -53,9 +53,8 @@ sphia_rm (sphia_t *sphia, const char *key) {
 
       if (-1 == rc) {
         return rc;
-      } else {
-        return sp_delete(sphia->db, tkey, tsize);
       }
+      return sp_delete(sphia->db, tkey, tsize);
     }
   }
 
