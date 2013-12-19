@@ -11,6 +11,7 @@ int __failed_assertions = 0;
  * count of failed assertions
  */
 
+#undef assert
 #define assert(expr) ({ \
   if (!(expr)) { \
     __failed_assertions++; \
