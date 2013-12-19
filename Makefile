@@ -29,6 +29,13 @@ test: $(TESTS)
 	@$(foreach e, $(TESTS:%.c=%), ./$(basename $(e)) && echo "  ✓ $(e)";)
 	@echo
 
+travis:
+	git clone --depth=1 git@github.com:pmwkaa/sophia.git sophia
+	$(MAKE) -C sophia/db
+	mv sophia/db sophia/sophia
+	rm -f sophia/sophia/*.so*
+	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) test
+
 install: $(MAN_FILES) build
 	mkdir -p $(PREFIX)/bin
 	install $(BIN) $(PREFIX)/bin
@@ -39,7 +46,7 @@ uninstall:
 	rm -f $(PREFIX)/bin/$(BIN) $(MANPREFIX)/$(MAN_FILES:man/%.md=%.1)
 
 clean:
-	rm -rf $(DEPS_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia
+	rm -rf $(DEPS_OBJS) $(OBJS) $(BIN) man/*.1 test-db test-sphia sophia
 	find test -type f -perm +111 -exec rm -f {} \;
 	rm -rf test/*.dSYM
 

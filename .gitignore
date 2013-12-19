@@ -21,5 +21,6 @@ sphia
 test-db
 test/*
 man/*.1
+sophia
 
 .vimrc
