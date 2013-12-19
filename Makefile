@@ -30,7 +30,7 @@ test: $(TESTS)
 	@echo
 
 travis:
-	git clone --depth=1 git@github.com:pmwkaa/sophia.git sophia
+	git clone --depth=1 https://github.com/larzconwell/sophia.git sophia
 	$(MAKE) -C sophia/db
 	mv sophia/db sophia/sophia
 	rm -f sophia/sophia/*.so*
