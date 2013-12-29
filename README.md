@@ -3,6 +3,8 @@ sphia(1) - cli tool for sophia databases
 
 Command utility for operations on a [sophia](https://github.com/pmwkaa/sophia) database
 
+[![Build Status](https://travis-ci.org/sphia/sphia.png?branch=master)](https://travis-ci.org/sphia/sphia)
+
 ## Install
 
 Before installing sphia, you'll need to install the Sophia libraries.
@@ -180,11 +182,7 @@ See [contributors](https://github.com/sphia/sphia/graphs/contributors)
 
 ### Contributing
 
-1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am "Add some feature")
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
+See [Contributing](https://github.com/sphia/sphia/wiki/Contributing)
 
 ## License
 
