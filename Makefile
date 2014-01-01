@@ -25,9 +25,7 @@ $(TESTS): $(DEPS_OBJS) $(OBJS)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(?) $(@).c -o $(@) $(LDFLAGS)
 
 test: $(TESTS)
-	@echo "\nRunning sphia tests"
-	@$(foreach e, $(TESTS:%.c=%), ./$(basename $(e)) && echo "  ✓ $(e)";)
-	@echo
+	./sphia-test
 
 travis:
 	git clone --depth=1 https://github.com/larzconwell/sophia.git sophia
