@@ -11,21 +11,15 @@
 
 char *
 sphia_get (sphia_t *sphia, const char *key) {
-  size_t size = strlen(key);
+  size_t size = strlen(key) + 1;
+  size_t vsize;
+  char *value;
+  int rc;
 
-  SPHIA_DB_FOREACH(k, v, sphia->db) {
-    k[sp_keysize(_c)] = '\0';
-    if (NULL == v) {
-      continue;
-    }
-    size_t ksize = strlen(k);
-
-    if (size == ksize) {
-      if (0 == strncmp(key, k, ksize) && 0 == strncmp(k, key, size)) {
-        sp_destroy(_c);
-        return v;
-      }
-    }
+  rc = sp_get(sphia->db, key, size, &value, &vsize);
+  if (1 == rc) {
+    if ('\0' != value[vsize]) value[vsize] = '\0';
+    return value;
   }
 
   return NULL;
