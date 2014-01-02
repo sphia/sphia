@@ -18,7 +18,7 @@ sphia_rm (sphia_t *sphia, const char *key) {
   char *keys[4096];
 
   if (NULL != key) {
-    size = sizeof(key);
+    size = strlen(key)+1;
   }
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
@@ -65,7 +65,7 @@ sphia_rm (sphia_t *sphia, const char *key) {
     // `sp_destroy(void *o)` already called
     for (i = 0; i < count; ++i) {
       if (NULL == keys[i]) continue;
-      rc = sp_delete(sphia->db, keys[i], sizeof(keys[i]));
+      rc = sp_delete(sphia->db, keys[i], strlen(keys[i])+1);
       if (-1 == rc) {
         return rc;
       }

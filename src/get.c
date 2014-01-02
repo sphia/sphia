@@ -11,7 +11,7 @@
 
 char *
 sphia_get (sphia_t *sphia, const char *key) {
-  size_t size = sizeof(key);
+  size_t size = strlen(key)+1;
   size_t vsize;
   char *value;
   int rc;
