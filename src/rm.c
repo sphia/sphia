@@ -18,7 +18,7 @@ sphia_rm (sphia_t *sphia, const char *key) {
   char *keys[4096];
 
   if (NULL != key) {
-    size = strlen(key)+1;
+    size = strlen(key) + 1;
   }
 
   SPHIA_DB_FOREACH(k, v, sphia->db) {
