@@ -11,7 +11,7 @@ test_set_get() {
   assert(-1 != rc);
 
   char *actual = sphia_get(sphia, key);
-  assert(0 == strcmp(actual, value));
+  assert(0 == strncmp(actual, value, sizeof(actual)));
 }
 
 TEST(test_set_get);
