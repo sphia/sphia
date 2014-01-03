@@ -7,13 +7,13 @@
 //
 
 
-#ifndef __case_h__
-#define __case_h__ 1
+#ifndef CASE_H
+#define CASE_H
 
-char *case_upper(char *str);
+char *case_upper(char *);
 
-char *case_lower(char *str);
+char *case_lower(char *);
 
-char *case_camel(char *str);
+char *case_camel(char *);
 
 #endif

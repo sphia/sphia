@@ -16,6 +16,7 @@ char *str_flatten(char *array[], int start, int end) {
   size += end - start - 1; // number of spaces
 
   char *str = malloc(sizeof(char) * size);
+  if (NULL == str) return NULL;
   int pos = 0;
 
   for (int i = start; i < end; i++) {

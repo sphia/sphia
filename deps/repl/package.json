@@ -1,0 +1,27 @@
+{
+  "name": "repl.h",
+  "version": "0.0.1",
+  "repo": "jwerle/repl.h",
+  "description": "Create a repl with eval/print/error hooks with given stdin, stdout, and stderr streams",
+  "keywords": [],
+  "license": "MIT",
+  "src": [
+    "src/buffer.c",
+    "src/buffer.h",
+    "src/error.c",
+    "src/error.h",
+    "src/eval.c",
+    "src/eval.h",
+    "src/init.c",
+    "src/init.h",
+    "src/loop.c",
+    "src/loop.h",
+    "src/print.c",
+    "src/print.h",
+    "src/read.c",
+    "src/read.h",
+    "src/term.c",
+    "src/term.h",
+    "src/repl.h"
+  ]
+}
