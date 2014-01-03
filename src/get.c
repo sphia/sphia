@@ -16,7 +16,7 @@ sphia_get (sphia_t *sphia, const char *key) {
   char *value;
   int rc;
 
-  rc = sp_get(sphia->db, key, size, &value, &vsize);
+  rc = sp_get(sphia->db, key, size, (void *) &value, &vsize);
   if (1 == rc) {
     if ('\0' != value[vsize]) value[vsize] = '\0';
     return value;
