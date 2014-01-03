@@ -65,7 +65,7 @@ sphia_rm (sphia_t *sphia, const char *key) {
     // `sp_destroy(void *o)` already called
     for (i = 0; i < count; ++i) {
       if (NULL == keys[i]) continue;
-      rc = sp_delete(sphia->db, keys[i], strlen(keys[i])+1);
+      rc = sp_delete(sphia->db, keys[i], strlen(keys[i]) + 1);
       if (-1 == rc) {
         return rc;
       }
