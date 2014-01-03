@@ -38,13 +38,16 @@ command_version(command_t *self) {
 
 void
 command_help(command_t *self) {
-  printf("usage: %s %s\n", self->name, self->usage);
-  printf("options:\n");
+  printf("\n");
+  printf("  Usage: %s %s\n", self->name, self->usage);
+  printf("\n");
+  printf("  Options:\n");
+  printf("\n");
 
   int i;
   for (i = 0; i < self->option_count; ++i) {
     command_option_t *option = &self->options[i];
-    printf("  %s, %-25s %s\n"
+    printf("    %s, %-25s %s\n"
       , option->small
       , option->large_with_arg
       , option->description);
@@ -132,17 +135,17 @@ normalize_args(int *argc, char **argv) {
   int size = 0;
   int alloc = *argc + 1;
   char **nargv = malloc(alloc * sizeof(char *));
-  int i, j;
+  int i;
 
   for (i = 0; argv[i]; ++i) {
     const char *arg = argv[i];
-    int len = strlen(arg);
+    size_t len = strlen(arg);
 
     // short flag
     if (len > 2 && '-' == arg[0] && !strchr(arg + 1, '-')) {
       alloc += len - 2;
       nargv = realloc(nargv, alloc * sizeof(char *));
-      for (j = 1; j < len; ++j) {
+      for (size_t j = 1; j < len; ++j) {
         nargv[size] = malloc(3);
         sprintf(nargv[size], "-%c", arg[j]);
         size++;
@@ -240,7 +243,6 @@ command_parse_args(command_t *self, int argc, char **argv) {
     // unrecognized
     if ('-' == arg[0] && !literal) {
       fprintf(stderr, "unrecognized flag %s\n", arg);
-      printf("usage: %s %s\n", self->name, self->usage);
       command_free(self);
       exit(1);
     }
@@ -263,4 +265,5 @@ void
 command_parse(command_t *self, int argc, char **argv) {
   self->nargv = normalize_args(&argc, argv);
   command_parse_args(self, argc, self->nargv);
+  self->argv[self->argc] = NULL;
 }

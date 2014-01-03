@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include "str-ends-with.h"
 
-bool str_ends_with(char *str, char *end) {
+bool str_ends_with(const char *str, const char *end) {
   int end_len = strlen(end);
   int str_len = strlen(str);
 

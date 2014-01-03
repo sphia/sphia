@@ -7,8 +7,8 @@
 //
 
 
-#ifndef TRIM
-#define TRIM
+#ifndef __TRIM__
+#define __TRIM__ 1
 
 char *trim(char *str);
 char *trim_right(char *str);

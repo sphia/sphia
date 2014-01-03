@@ -1,0 +1,12 @@
+{
+  "name": "inih",
+  "version": "0.0.0",
+  "repo": "clibs/inih",
+  "description": "simple .INI file parser",
+  "keywords": [ "ini", "parser" ],
+  "license": "BSD",
+  "src": [
+    "ini.c",
+    "ini.h"
+  ]
+}

@@ -5,5 +5,15 @@
   "description": "Command line utility for reading a sophia database",
   "keywords": ["sophia", "sphia", "cli", "util"],
   "license": "MIT",
-  "install": "make install"
+  "install": "make install",
+  "dependencies": {
+    "clibs/commander": "*",
+    "stephenmathieson/case.c": "*",
+    "clibs/inih": "*",
+    "jwerle/repl.h": "*",
+    "stephenmathieson/str-ends-with.c": "*",
+    "stephenmathieson/str-flatten.c": "*",
+    "stephenmathieson/trim.c": "*",
+    "clibs/which": "*"
+  }
 }
