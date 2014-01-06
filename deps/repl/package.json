@@ -1,5 +1,5 @@
 {
-  "name": "repl.h",
+  "name": "repl",
   "version": "0.0.1",
   "repo": "jwerle/repl.h",
   "description": "Create a repl with eval/print/error hooks with given stdin, stdout, and stderr streams",
