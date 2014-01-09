@@ -182,7 +182,7 @@ See [contributors](https://github.com/sphia/sphia/graphs/contributors)
 
 ### Contributing
 
-See [Contributing](https://github.com/sphia/sphia/wiki/Contributing)
+See [Contributing](https://github.com/sphia/contributing/wiki)
 
 ## License
 
